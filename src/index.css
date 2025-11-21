@@ -1,0 +1,27 @@
+@import url('https://fonts.cdnfonts.com/css/uber-move-text');
+
+:root {
+  font-family: 'Uber Move Text', 'Uber Move', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  color: #f5f7ff;
+  background-color: #020a1f;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #020a1f;
+}
+
+#root {
+  min-height: 100vh;
+}

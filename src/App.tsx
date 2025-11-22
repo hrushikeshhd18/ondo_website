@@ -264,7 +264,7 @@ function App() {
 
         <main className="hero__content">
           <div className="hero__text">
-            <span className="hero__tagline">“Save Energy, Smarter Control”</span>
+            <span className="hero__tagline">Save Energy, Smarter Control</span>
             <h1>Welcome to the future of energy conservation!</h1>
             <p>
               Reduce electricity bills, protect your appliances, and contribute to a greener

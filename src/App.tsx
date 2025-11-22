@@ -17,6 +17,18 @@ import energySavingsIcon from '../assets/energy_cost_savings.png'
 import easyInstallationIcon from '../assets/easy_installation.png'
 import durableDesignIcon from '../assets/durable_reliable_design.png'
 import ecoFriendlyOperationIcon from '../assets/ecofriendly_operation.png'
+import homePowerSaverImage from '../assets/Home_power_saver_image.png'
+import industrialPowerSaverImage from '../assets/industrial_power_saver_image.png'
+import residentialHomesIcon from '../assets/residential_homes.png'
+import commercialSpacesIcon from '../assets/commercial_spaces.png'
+import industrialPlantsIcon from '../assets/small_scale_industrial_plants.png'
+import retailEstablishmentsIcon from '../assets/retail_establishments_icon.png'
+import costSavingsIcon from '../assets/cost_savings.png'
+import safetyFirstIcon from '../assets/safety_first_card_icon.png'
+import userFriendlyIcon from '../assets/user_friendly_card_icon.png'
+import customerSupportIcon from '../assets/customer_supoort_icon.png'
+import trustIcon from '../assets/trust_card_icon.png'
+import certificationIcon from '../assets/certification_card_icon.png'
 
 const navLinks = [
   { label: 'Home', href: '#' },
@@ -135,6 +147,99 @@ const imesFeatures = [
   },
 ]
 
+const productCards = [
+  {
+    image: homePowerSaverImage,
+    alt: 'Home power saver device',
+    category: 'For Home',
+    title: 'Power Saver & Protector',
+    features: [
+      'Shields appliances from sudden voltage spikes',
+      'Reduces power wastage in household wiring',
+      'Improves power factor & efficiency',
+      'Protects against voltage fluctuations',
+      'Enhances appliance lifespan',
+      'Easy installation',
+      'Low maintenance, long-lasting',
+    ],
+  },
+  {
+    image: industrialPowerSaverImage,
+    alt: 'Industrial power saver device',
+    category: 'For Commercial/Industrial',
+    title: 'Power Saver',
+    features: [
+      'High-capacity energy optimization',
+      'Improves power factor & efficiency',
+      'Provides stable power supply',
+      'Reduces electricity bills significantly',
+      'Suitable for offices, shops, factories',
+    ],
+  },
+]
+
+const useCases = [
+  {
+    icon: residentialHomesIcon,
+    alt: 'Residential homes icon',
+    title: 'Residential Homes',
+  },
+  {
+    icon: commercialSpacesIcon,
+    alt: 'Commercial spaces icon',
+    title: 'Commercial Spaces',
+  },
+  {
+    icon: industrialPlantsIcon,
+    alt: 'Small scale industrial plants icon',
+    title: 'Small Scale Industrial Plants',
+  },
+  {
+    icon: retailEstablishmentsIcon,
+    alt: 'Retail establishments icon',
+    title: 'Retail Establishments',
+  },
+]
+
+const benefits = [
+  {
+    icon: costSavingsIcon,
+    alt: 'Cost savings icon',
+    title: 'Cost Savings',
+    description: 'Enjoy reduced energy bills thanks to the smart energy-saving features of our product.',
+  },
+  {
+    icon: safetyFirstIcon,
+    alt: 'Safety first icon',
+    title: 'Safety First',
+    description: 'Protect your expensive electrical appliances from damaging surges and spikes.',
+  },
+  {
+    icon: userFriendlyIcon,
+    alt: 'User friendly icon',
+    title: 'User Friendly',
+    description: 'Simple, quick installation with minimal maintenance.',
+  },
+  {
+    icon: customerSupportIcon,
+    alt: 'Customer support icon',
+    title: 'Customer Support',
+    description: 'Our dedicated customer service team is here to assist you with any questions or troubleshooting.',
+  },
+  {
+    icon: trustIcon,
+    alt: 'Trust icon',
+    title: 'Trust',
+    description: 'Feedback from clients. It is mention in Case Studies',
+  },
+  {
+    icon: certificationIcon,
+    alt: 'Certification icon',
+    title: 'Certification',
+    description: 'Product has been certified. ISI, ISO & C E',
+  },
+]
+
 function App() {
   return (
     <>
@@ -172,7 +277,7 @@ function App() {
             <div className="hero__product-card">
               <img src={heroProduct} alt="Ondo smart energy controller" />
             </div>
-          </div>
+      </div>
         </main>
       </section>
 
@@ -228,6 +333,150 @@ function App() {
                 <p className="imes-feature-card__description">{feature.description}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="products" id="products">
+        <div className="products__wrapper">
+          <div className="products__tag">Products</div>
+          <h2 className="products__title">Our Offerings</h2>
+          <p className="products__description">
+            Our product range is designed to save power, protect appliances, and optimize energy
+            usage across households, commercial establishments, and industries.
+          </p>
+          {productCards.map((product, index) => (
+            <article className="product-card" key={index}>
+              <div className="product-card__image">
+                <img src={product.image} alt={product.alt} />
+              </div>
+              <div className="product-card__content">
+                <p className="product-card__category">{product.category}</p>
+                <h3 className="product-card__title">{product.title}</h3>
+                <ol className="product-card__features">
+                  {product.features.map((feature, featureIndex) => (
+                    <li key={featureIndex}>{feature}</li>
+                  ))}
+                </ol>
+                <button className="btn btn--primary product-card__cta">Contact Us</button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="use-cases" id="use-cases">
+        <div className="use-cases__wrapper">
+          <h2 className="use-cases__title">Where you can use</h2>
+          <p className="use-cases__description">
+            Our product range is designed to save power, protect appliances, and optimize energy
+            usage across households, commercial establishments, and industries.
+          </p>
+          <div className="use-cases__grid">
+            {useCases.map((useCase, index) => (
+              <article className="use-case-card" key={index}>
+                <img className="use-case-card__icon" src={useCase.icon} alt={useCase.alt} />
+                <h3 className="use-case-card__title">{useCase.title}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="benefits" id="benefits">
+        <div className="benefits__wrapper">
+          <div className="benefits__tag">Benefits</div>
+          <h2 className="benefits__title">Why Choose Us</h2>
+          <div className="benefits__grid">
+            {benefits.map((benefit, index) => (
+              <article className="benefit-card" key={index}>
+                <img className="benefit-card__icon" src={benefit.icon} alt={benefit.alt} />
+                <h3 className="benefit-card__title">{benefit.title}</h3>
+                <p className="benefit-card__description">{benefit.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="testimonials" id="testimonials">
+        <div className="testimonials__wrapper">
+          <div className="testimonials__tag">Review</div>
+          <h2 className="testimonials__title">What do people say about us</h2>
+          <p className="testimonials__description">
+            Over 10,000 satisfied customers across households, corporate offices, and manufacturing
+            units have reduced their electricity costs with our products
+          </p>
+          <div className="testimonials__grid">
+            <article className="testimonial-card">
+              <div className="testimonial-card__header">
+                <div className="testimonial-card__avatar">
+                  <div className="testimonial-card__avatar-placeholder">RK</div>
+                </div>
+                <div className="testimonial-card__info">
+                  <h3 className="testimonial-card__name">Rajesh Kumar</h3>
+                  <p className="testimonial-card__title">Home Owner</p>
+                </div>
+              </div>
+              <div className="testimonial-card__rating">
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+              </div>
+              <p className="testimonial-card__text">
+                "The power saver has reduced our electricity bills by almost 30% in just three
+                months. Installation was quick and easy, and we noticed the difference immediately.
+                Excellent investment for any household!"
+              </p>
+            </article>
+            <article className="testimonial-card">
+              <div className="testimonial-card__header">
+                <div className="testimonial-card__avatar">
+                  <div className="testimonial-card__avatar-placeholder">PS</div>
+                </div>
+                <div className="testimonial-card__info">
+                  <h3 className="testimonial-card__name">Priya Sharma</h3>
+                  <p className="testimonial-card__title">Business Owner</p>
+                </div>
+              </div>
+              <div className="testimonial-card__rating">
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star">★</span>
+              </div>
+              <p className="testimonial-card__text">
+                "Our appliances are now better protected from voltage fluctuations, and the energy
+                savings have been substantial. The device is very reliable and requires minimal
+                maintenance. Highly satisfied with the purchase!"
+              </p>
+            </article>
+            <article className="testimonial-card">
+              <div className="testimonial-card__header">
+                <div className="testimonial-card__avatar">
+                  <div className="testimonial-card__avatar-placeholder">AP</div>
+                </div>
+                <div className="testimonial-card__info">
+                  <h3 className="testimonial-card__name">Amit Patel</h3>
+                  <p className="testimonial-card__title">Factory Manager</p>
+                </div>
+              </div>
+              <div className="testimonial-card__rating">
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+                <span className="star star--filled">★</span>
+              </div>
+              <p className="testimonial-card__text">
+                "We installed this in our factory and saw immediate improvements in power factor
+                and energy efficiency. The ROI has been excellent, and our electricity costs have
+                dropped significantly. Great investment for any industrial setup!"
+              </p>
+            </article>
           </div>
         </div>
       </section>

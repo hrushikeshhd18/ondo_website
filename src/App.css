@@ -3537,55 +3537,65 @@ a.btn:focus {
   }
 }
 
-/* Hero Section Entrance Animations */
+/* Hero Section Entrance Animations - No blinking */
 .animate-fade-in {
-  animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
+  animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
+  transform: translateY(60px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .animate-fade-in-up-delay {
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
   opacity: 0;
+  transform: translateY(60px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
 }
 
 .animate-fade-in-up-delay-2 {
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
   opacity: 0;
+  transform: translateY(60px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
 }
 
 .animate-fade-in-up-delay-3 {
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
   opacity: 0;
+  transform: translateY(60px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
 }
 
 .animate-fade-in-right {
-  animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
   opacity: 0;
+  transform: translateX(60px);
+  animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 
-/* Professional Scroll-triggered Animations */
+/* Professional Scroll-triggered Animations - No blinking */
 .scroll-animate {
   opacity: 0;
   transform: translateY(60px);
   transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: opacity, transform;
+  visibility: hidden;
 }
 
 .scroll-animate.animate-in {
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
 }
 
-/* Staggered animations for cards with professional easing */
+/* Staggered animations for cards with professional easing - no blinking */
 .feature-card.scroll-animate.animate-in,
 .imes-feature-card.scroll-animate.animate-in,
 .product-card.scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
   animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 

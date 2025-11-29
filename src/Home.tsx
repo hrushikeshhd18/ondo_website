@@ -272,6 +272,7 @@ function Home() {
           >
             <span />
             <span />
+            <span />
           </button>
 
           <div className="hero__nav-main">

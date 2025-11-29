@@ -40,6 +40,7 @@ function ContactUs() {
           >
             <span />
             <span />
+            <span />
           </button>
           <nav className="about-us__header-links">
             <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>

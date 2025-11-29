@@ -103,6 +103,7 @@ function AboutUs() {
           >
             <span />
             <span />
+            <span />
           </button>
           <nav className="about-us__header-links">
             {navLinks.map((link) =>

@@ -57,6 +57,7 @@ function Products() {
           >
             <span />
             <span />
+            <span />
           </button>
           <nav className="about-us__header-links">
             <Link to="/" onClick={handleNavItemClick}>Home</Link>

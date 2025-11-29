@@ -252,38 +252,27 @@ function Home() {
     setIsMenuOpen(false);
   };
 
-  // Scroll animation hook - prevent blinking
+  // Scroll animation hook
   useEffect(() => {
-    // Small delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -80px 0px'
-      };
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            // Unobserve after animation to prevent re-triggering
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      const elements = document.querySelectorAll('.scroll-animate');
-      elements.forEach((el) => {
-        // Ensure element is initially hidden
-        (el as HTMLElement).style.visibility = 'hidden';
-        observer.observe(el);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
       });
+    }, observerOptions);
 
-      return () => {
-        elements.forEach((el) => observer.unobserve(el));
-      };
-    }, 100);
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach((el) => observer.observe(el));
 
-    return () => clearTimeout(timer);
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
   }, []);
 
   return (

@@ -3483,7 +3483,7 @@ a.btn:focus {
   }
 }
 
-/* Professional Scroll Animations for Home Page */
+/* Simple Animations for Home Page */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -3496,7 +3496,7 @@ a.btn:focus {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(60px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -3507,7 +3507,7 @@ a.btn:focus {
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(60px);
+    transform: translateX(20px);
   }
   to {
     opacity: 1;
@@ -3515,183 +3515,111 @@ a.btn:focus {
   }
 }
 
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Hero Section Entrance Animations - No blinking */
+/* Hero Section Entrance Animations */
 .animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
   opacity: 0;
-  animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
-  transform: translateY(60px);
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .animate-fade-in-up-delay {
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
   opacity: 0;
-  transform: translateY(60px);
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
 }
 
 .animate-fade-in-up-delay-2 {
+  animation: fadeInUp 0.6s ease-out 0.4s forwards;
   opacity: 0;
-  transform: translateY(60px);
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
 }
 
 .animate-fade-in-up-delay-3 {
+  animation: fadeInUp 0.6s ease-out 0.6s forwards;
   opacity: 0;
-  transform: translateY(60px);
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
 }
 
 .animate-fade-in-right {
+  animation: fadeInRight 0.8s ease-out 0.3s forwards;
   opacity: 0;
-  transform: translateX(60px);
-  animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 
-/* Professional Scroll-triggered Animations - No blinking */
+/* Simple Scroll-triggered Animations */
 .scroll-animate {
   opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity, transform;
-  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .scroll-animate.animate-in {
   opacity: 1;
   transform: translateY(0);
-  visibility: visible;
 }
 
-/* Staggered animations for cards with professional easing - no blinking */
+/* Staggered animations for cards */
 .feature-card.scroll-animate.animate-in,
 .imes-feature-card.scroll-animate.animate-in,
 .product-card.scroll-animate.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 /* Mission section animation */
 .mission.scroll-animate.animate-in {
-  animation: scaleIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 /* Products section animation */
 .products__tag.scroll-animate.animate-in,
 .products__title.scroll-animate.animate-in {
-  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 .products__description.scroll-animate.animate-in {
-  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  animation: fadeInUp 0.5s ease-out 0.2s forwards;
 }
 
 /* Features section animations */
 .features__tag.scroll-animate.animate-in,
 .features__title.scroll-animate.animate-in {
-  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 /* About section animations */
 .about__intro.scroll-animate.animate-in {
-  animation: fadeInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* Professional Card Hover and Elevate States */
+/* Simple Card Hover and Elevate States */
 .feature-card {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  position: relative;
-  will-change: transform, box-shadow;
 }
 
 .feature-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-              0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .imes-feature-card {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  position: relative;
-  will-change: transform, box-shadow;
 }
 
 .imes-feature-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
-              0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .product-card {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  position: relative;
-  will-change: transform, box-shadow;
 }
 
 .product-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.18),
-              0 14px 28px rgba(0, 0, 0, 0.12);
-}
-
-/* Icon animations on hover */
-.feature-card:hover .feature-card__icon,
-.imes-feature-card:hover .imes-feature-card__icon {
-  transform: scale(1.1) rotate(5deg);
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.feature-card__icon,
-.imes-feature-card__icon {
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Product card image zoom on hover */
-.product-card:hover .product-card__image img {
-  transform: scale(1.05);
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.product-card__image img {
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Button hover effects within cards */
-.feature-card:hover .btn,
-.product-card:hover .product-card__cta {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(255, 157, 47, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
 }
 
 /* Reduce motion for users who prefer it */

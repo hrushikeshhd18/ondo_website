@@ -25,33 +25,35 @@ function ContactUs() {
 
   return (
     <>
-      <header className={`about-us__header ${isMenuOpen ? "about-us__header--open" : ""}`}>
-        <div className="about-us__header-top-border"></div>
-        <div className="about-us__header-content">
-          <Link className="about-us__header-brand" to="/">
-            <img src={logo} alt="Ondo logo" />
-          </Link>
-          <button
-            type="button"
-            className="about-us__menu-toggle"
-            aria-label="Toggle navigation menu"
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-          <nav className="about-us__header-links">
+      <header className={`hero__nav hero__nav--white ${isMenuOpen ? "hero__nav--open" : ""}`}>
+        <Link className="hero__brand" to="/">
+          <img src={logo} alt="Ondo logo" />
+        </Link>
+        <button
+          type="button"
+          className="hero__menu-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <div className="hero__nav-main">
+          <nav className="hero__links">
             <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link to="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link>
             <Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
           </nav>
-          <div className="about-us__header-actions">
+          <div className="hero__actions">
             <Link to="/contact" className="btn btn--primary" onClick={() => setIsMenuOpen(false)}>
               Contact Us
             </Link>
-            <button className="btn btn--ghost btn--ghost-dark">Login</button>
+            <button className="btn btn--ghost btn--ghost-dark" onClick={() => setIsMenuOpen(false)}>
+              Login
+            </button>
           </div>
         </div>
       </header>

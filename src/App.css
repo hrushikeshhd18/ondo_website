@@ -205,6 +205,34 @@ a.btn:focus {
   align-items: center;
 }
 
+.about-us__menu-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 101;
+}
+
+.about-us__menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: #1a1a1a;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.about-us__header--open .about-us__menu-toggle span:first-child {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.about-us__header--open .about-us__menu-toggle span:last-child {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
 .btn--ghost-dark {
   background: #fff;
   color: #1a1a1a;
@@ -2900,5 +2928,427 @@ a.btn:focus {
 @media (max-width: 1024px) {
   .contact-us__content {
     grid-template-columns: 1fr;
+  }
+
+  .product-detail__main {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail__image-panel {
+    order: 1;
+  }
+
+  .product-detail__content {
+    order: 2;
+  }
+
+  .about-us__menu-toggle {
+    display: inline-flex;
+  }
+
+  .about-us__header-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .about-us__header--open .about-us__header-links {
+    display: flex;
+  }
+
+  .about-us__header-links a {
+    padding: 0.875rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 15px;
+  }
+
+  .about-us__header-links a:last-child {
+    border-bottom: none;
+  }
+
+  .about-us__header-actions {
+    gap: 0.75rem;
+  }
+
+  .about-us__header-actions .btn {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-us__hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .contact-us__title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-us__tag {
+    font-size: 12px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .contact-us__form {
+    gap: 1rem;
+  }
+
+  .contact-us__field input,
+  .contact-us__field textarea {
+    padding: 0.6rem 0.9rem;
+    font-size: 14px;
+  }
+
+  .product-detail__wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .product-detail__hero {
+    padding-bottom: 2rem;
+  }
+
+  .product-detail__main {
+    gap: 1.5rem;
+  }
+
+  .product-detail__image-card {
+    padding: 1.5rem;
+    border-radius: 24px;
+  }
+
+  .product-detail__image-card img {
+    max-width: 100%;
+  }
+
+  .product-detail__thumbnail-row {
+    gap: 0.5rem;
+  }
+
+  .product-detail__thumbnail,
+  .product-detail__thumbnail-placeholder {
+    border-radius: 12px;
+  }
+
+  .product-detail__thumbnail-nav-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 16px;
+  }
+
+  .product-detail__title {
+    font-size: clamp(1.5rem, 5vw, 24px);
+  }
+
+  .product-detail__price {
+    font-size: 18px;
+  }
+
+  .product-detail__field-label {
+    font-size: 13px;
+  }
+
+  .product-detail__quantity {
+    font-size: 14px;
+  }
+
+  .product-detail__qty-btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 14px;
+  }
+
+  .product-detail__variants {
+    gap: 0.5rem;
+  }
+
+  .product-detail__variant {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+  }
+
+  .product-detail__cta-row {
+    flex-direction: column;
+  }
+
+  .product-detail__cta-primary,
+  .product-detail__cta-secondary {
+    width: 100%;
+  }
+
+  .product-detail__icons-row {
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .product-detail__icon-item {
+    font-size: 13px;
+  }
+
+  .product-detail__icon-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .product-detail__section-title {
+    font-size: 18px;
+  }
+
+  .product-detail__subheading {
+    font-size: 15px;
+  }
+
+  .product-detail__paragraph {
+    font-size: 14px;
+  }
+
+  .product-detail__features {
+    font-size: 14px;
+  }
+
+  .product-detail__installation-step {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .product-detail__installation-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .product-detail__installation-content h4 {
+    font-size: 14px;
+  }
+
+  .product-detail__installation-content p {
+    font-size: 13px;
+  }
+
+  .product-detail__note-card {
+    padding: 0.875rem 1rem;
+  }
+
+  .product-detail__note-heading {
+    font-size: 15px;
+  }
+
+  .about-us__header-content {
+    padding: 1rem 1.5rem;
+    position: relative;
+  }
+
+  .about-us__header-brand img {
+    width: 80px;
+  }
+
+  .about-us__header-links {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .about-us__header-links a {
+    padding: 0.75rem 0;
+    font-size: 14px;
+  }
+
+  .about-us__header-actions {
+    gap: 0.5rem;
+  }
+
+  .about-us__header-actions .btn {
+    padding: 0.5rem 0.875rem;
+    font-size: 13px;
+  }
+
+  .about-us__header-actions .btn--ghost {
+    display: none;
+  }
+
+  .about-us__wrapper {
+    padding-inline: 1.5rem;
+  }
+
+  .about-us__tag {
+    font-size: 12px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .about-us__heading--hero {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  .about-us__description {
+    font-size: clamp(0.875rem, 2.5vw, 16px);
+  }
+
+  .about-us__mission-content,
+  .about-us__vision-content {
+    gap: 1.5rem;
+  }
+
+  .about-us__mission-image,
+  .about-us__vision-image {
+    width: 100%;
+  }
+
+  .about-us__values-grid {
+    gap: 1rem;
+  }
+
+  .about-us__value-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .about-us__value-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .about-us__value-title {
+    font-size: 16px;
+  }
+
+  .about-us__value-description {
+    font-size: 13px;
+  }
+
+  .about-us__leadership-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 1.5rem;
+  }
+
+  .about-us__leader-card {
+    max-width: 100%;
+  }
+
+  .about-us__leader-card-image-wrapper {
+    padding-top: 120%;
+  }
+
+  .about-us__leader-name {
+    font-size: 18px;
+  }
+
+  .about-us__leader-title {
+    font-size: 14px;
+  }
+
+  .about-us__journey-content {
+    gap: 1.5rem;
+  }
+
+  .about-us__journey-image {
+    width: 100%;
+  }
+
+  .about-us__future-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .about-us__future-title {
+    font-size: clamp(1.5rem, 5vw, 32px);
+  }
+
+  .about-us__future-description {
+    font-size: clamp(0.875rem, 2.5vw, 16px);
+  }
+
+  .products-page__intro {
+    padding: 2rem 1.5rem;
+  }
+
+  .products-page__intro-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  .products-page__intro-subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 18px);
+  }
+
+  .products-page__card {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .products-page__card-title {
+    font-size: clamp(1.25rem, 4vw, 24px);
+  }
+
+  .products-page__card-description {
+    font-size: clamp(0.875rem, 2.5vw, 16px);
+  }
+
+  .products-page__card-image img {
+    max-width: 100%;
+  }
+
+  .products-page__where {
+    padding: 2rem 1.5rem;
+  }
+
+  .products-page__where-title {
+    font-size: clamp(1.5rem, 5vw, 32px);
+  }
+
+  .products-page__where-subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 18px);
+  }
+
+  .products-page__where-grid {
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .products-page__where-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .products-page__where-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .products-page__where-title-card {
+    font-size: 16px;
+  }
+
+  .products-page__how {
+    padding: 2rem 1.5rem;
+  }
+
+  .products-page__how-title {
+    font-size: clamp(1.5rem, 5vw, 40px);
+  }
+
+  .products-page__how-illustration-img {
+    max-width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .product-detail-modal__dialog {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .product-detail-modal__field-row {
+    flex-direction: column;
+  }
+
+  .product-detail-modal__actions {
+    flex-direction: column;
+  }
+
+  .product-detail-modal__btn {
+    width: 100%;
   }
 }

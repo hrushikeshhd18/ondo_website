@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import logo from "../assets/logo.png";
@@ -79,29 +80,45 @@ const leadership = [
 ];
 
 function AboutUs() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleNavItemClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
-      <header className="about-us__header">
+      <header className={`about-us__header ${isMenuOpen ? "about-us__header--open" : ""}`}>
         <div className="about-us__header-top-border"></div>
         <div className="about-us__header-content">
           <Link className="about-us__header-brand" to="/">
             <img src={logo} alt="Ondo logo" />
           </Link>
+          <button
+            type="button"
+            className="about-us__menu-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+          </button>
           <nav className="about-us__header-links">
             {navLinks.map((link) =>
               link.href.startsWith("#") ? (
-                <a key={link.label} href={link.href}>
+                <a key={link.label} href={link.href} onClick={handleNavItemClick}>
                   {link.label}
                 </a>
               ) : (
-                <Link key={link.label} to={link.href}>
+                <Link key={link.label} to={link.href} onClick={handleNavItemClick}>
                   {link.label}
                 </Link>
               )
             )}
           </nav>
           <div className="about-us__header-actions">
-            <Link to="/contact" className="btn btn--primary">Contact Us</Link>
+            <Link to="/contact" className="btn btn--primary" onClick={handleNavItemClick}>Contact Us</Link>
             <button className="btn btn--ghost btn--ghost-dark">Login</button>
           </div>
         </div>

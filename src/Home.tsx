@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import heroBackground from "../assets/hero_background.jpg";
@@ -252,6 +252,29 @@ function Home() {
     setIsMenuOpen(false);
   };
 
+  // Scroll animation hook
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <>
       <section
@@ -309,17 +332,17 @@ function Home() {
         </header>
 
         <main className="hero__content">
-          <div className="hero__text">
-            <span className="hero__tagline">Save Energy, Smarter Control</span>
-            <h1>Welcome to the future of energy conservation!</h1>
-            <p>
+          <div className="hero__text animate-fade-in-up">
+            <span className="hero__tagline animate-fade-in">Save Energy, Smarter Control</span>
+            <h1 className="animate-fade-in-up-delay">Welcome to the future of energy conservation!</h1>
+            <p className="animate-fade-in-up-delay-2">
               Reduce electricity bills, protect your appliances, and contribute
               to a greener future with our advanced power saver solutions.
             </p>
-            <Link to="/contact" className="btn btn--primary hero__cta">Contact Us</Link>
+            <Link to="/contact" className="btn btn--primary hero__cta animate-fade-in-up-delay-3">Contact Us</Link>
           </div>
 
-          <div className="hero__visual">
+          <div className="hero__visual animate-fade-in-right">
             <div className="hero__product-card">
               <img src={heroProduct} alt="Ondo smart energy controller" />
             </div>
@@ -329,7 +352,7 @@ function Home() {
 
       <section className="about" id="about">
         <div className="about__wrapper">
-          <div className="about__intro">
+          <div className="about__intro scroll-animate">
             <h2>Who are we?</h2>
             <p>
               We are a technology-driven company creating innovative
@@ -341,8 +364,8 @@ function Home() {
           </div>
 
           <div className="about__cards">
-            {featureCards.map((card) => (
-              <article className="feature-card" key={card.titleLines.join("-")}>
+            {featureCards.map((card, index) => (
+              <article className="feature-card scroll-animate" key={card.titleLines.join("-")} style={{ animationDelay: `${index * 0.1}s` }}>
                 <img
                   className="feature-card__icon"
                   src={card.icon}
@@ -360,7 +383,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mission" aria-labelledby="mission-heading">
+      <section className="mission scroll-animate" aria-labelledby="mission-heading">
         <div className="mission__tag">Our Mission</div>
         <p className="mission__statement" id="mission-heading">
           We <span>innovate</span> to empower every home and industry with
@@ -370,11 +393,11 @@ function Home() {
 
       <section className="features" id="features">
         <div className="features__wrapper">
-          <div className="features__tag">Features</div>
-          <h2 className="features__title">Key Features of IMES Device</h2>
+          <div className="features__tag scroll-animate">Features</div>
+          <h2 className="features__title scroll-animate">Key Features of IMES Device</h2>
           <div className="features__grid">
             {imesFeatures.map((feature, index) => (
-              <article className="imes-feature-card" key={index}>
+              <article className="imes-feature-card scroll-animate" key={index} style={{ animationDelay: `${index * 0.05}s` }}>
                 <img
                   className="imes-feature-card__icon"
                   src={feature.icon}
@@ -396,15 +419,15 @@ function Home() {
 
       <section className="products" id="products">
         <div className="products__wrapper">
-          <div className="products__tag">Products</div>
-          <h2 className="products__title">Our Offerings</h2>
-          <p className="products__description">
+          <div className="products__tag scroll-animate">Products</div>
+          <h2 className="products__title scroll-animate">Our Offerings</h2>
+          <p className="products__description scroll-animate">
             Our product range is designed to save power, protect appliances, and
             optimize energy usage across households, commercial establishments,
             and industries.
           </p>
           {productCards.map((product, index) => (
-            <article className="product-card" key={index}>
+            <article className="product-card scroll-animate" key={index} style={{ animationDelay: `${index * 0.15}s` }}>
               <div className="product-card__image">
                 <img src={product.image} alt={product.alt} />
               </div>

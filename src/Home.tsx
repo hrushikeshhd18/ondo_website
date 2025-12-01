@@ -252,22 +252,23 @@ function Home() {
     setIsMenuOpen(false);
   };
 
-  // Scroll animation hook
+  // Simple scroll animation
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      }
+    );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.scroll-animate');
+    const elements = document.querySelectorAll("[data-scroll]");
     elements.forEach((el) => observer.observe(el));
 
     return () => {
@@ -332,17 +333,17 @@ function Home() {
         </header>
 
         <main className="hero__content">
-          <div className="hero__text animate-fade-in-up">
-            <span className="hero__tagline animate-fade-in">Save Energy, Smarter Control</span>
-            <h1 className="animate-fade-in-up-delay">Welcome to the future of energy conservation!</h1>
-            <p className="animate-fade-in-up-delay-2">
+          <div className="hero__text">
+            <span className="hero__tagline">Save Energy, Smarter Control</span>
+            <h1>Welcome to the future of energy conservation!</h1>
+            <p>
               Reduce electricity bills, protect your appliances, and contribute
               to a greener future with our advanced power saver solutions.
             </p>
-            <Link to="/contact" className="btn btn--primary hero__cta animate-fade-in-up-delay-3">Contact Us</Link>
+            <Link to="/contact" className="btn btn--primary hero__cta">Contact Us</Link>
           </div>
 
-          <div className="hero__visual animate-fade-in-right">
+          <div className="hero__visual">
             <div className="hero__product-card">
               <img src={heroProduct} alt="Ondo smart energy controller" />
             </div>
@@ -352,7 +353,7 @@ function Home() {
 
       <section className="about" id="about">
         <div className="about__wrapper">
-          <div className="about__intro scroll-animate">
+          <div className="about__intro" data-scroll>
             <h2>Who are we?</h2>
             <p>
               We are a technology-driven company creating innovative
@@ -364,8 +365,8 @@ function Home() {
           </div>
 
           <div className="about__cards">
-            {featureCards.map((card, index) => (
-              <article className="feature-card scroll-animate" key={card.titleLines.join("-")} style={{ animationDelay: `${index * 0.1}s` }}>
+            {featureCards.map((card) => (
+              <article className="feature-card" key={card.titleLines.join("-")} data-scroll>
                 <img
                   className="feature-card__icon"
                   src={card.icon}
@@ -383,7 +384,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mission scroll-animate" aria-labelledby="mission-heading">
+      <section className="mission" aria-labelledby="mission-heading" data-scroll>
         <div className="mission__tag">Our Mission</div>
         <p className="mission__statement" id="mission-heading">
           We <span>innovate</span> to empower every home and industry with
@@ -393,11 +394,11 @@ function Home() {
 
       <section className="features" id="features">
         <div className="features__wrapper">
-          <div className="features__tag scroll-animate">Features</div>
-          <h2 className="features__title scroll-animate">Key Features of IMES Device</h2>
+          <div className="features__tag" data-scroll>Features</div>
+          <h2 className="features__title" data-scroll>Key Features of IMES Device</h2>
           <div className="features__grid">
             {imesFeatures.map((feature, index) => (
-              <article className="imes-feature-card scroll-animate" key={index} style={{ animationDelay: `${index * 0.05}s` }}>
+              <article className="imes-feature-card" key={index} data-scroll>
                 <img
                   className="imes-feature-card__icon"
                   src={feature.icon}
@@ -419,15 +420,15 @@ function Home() {
 
       <section className="products" id="products">
         <div className="products__wrapper">
-          <div className="products__tag scroll-animate">Products</div>
-          <h2 className="products__title scroll-animate">Our Offerings</h2>
-          <p className="products__description scroll-animate">
+          <div className="products__tag" data-scroll>Products</div>
+          <h2 className="products__title" data-scroll>Our Offerings</h2>
+          <p className="products__description" data-scroll>
             Our product range is designed to save power, protect appliances, and
             optimize energy usage across households, commercial establishments,
             and industries.
           </p>
           {productCards.map((product, index) => (
-            <article className="product-card scroll-animate" key={index} style={{ animationDelay: `${index * 0.15}s` }}>
+            <article className="product-card" key={index} data-scroll>
               <div className="product-card__image">
                 <img src={product.image} alt={product.alt} />
               </div>
@@ -450,15 +451,15 @@ function Home() {
 
       <section className="use-cases" id="use-cases">
         <div className="use-cases__wrapper">
-          <h2 className="use-cases__title">Where you can use</h2>
-          <p className="use-cases__description">
+          <h2 className="use-cases__title" data-scroll>Where you can use</h2>
+          <p className="use-cases__description" data-scroll>
             Our product range is designed to save power, protect appliances, and
             optimize energy usage across households, commercial establishments,
             and industries.
           </p>
           <div className="use-cases__grid">
             {useCases.map((useCase, index) => (
-              <article className="use-case-card" key={index}>
+              <article className="use-case-card" key={index} data-scroll>
                 <img
                   className="use-case-card__icon"
                   src={useCase.icon}
@@ -473,11 +474,11 @@ function Home() {
 
       <section className="benefits" id="benefits">
         <div className="benefits__wrapper">
-          <div className="benefits__tag">Benefits</div>
-          <h2 className="benefits__title">Why Choose Us</h2>
+          <div className="benefits__tag" data-scroll>Benefits</div>
+          <h2 className="benefits__title" data-scroll>Why Choose Us</h2>
           <div className="benefits__grid">
             {benefits.map((benefit, index) => (
-              <article className="benefit-card" key={index}>
+              <article className="benefit-card" key={index} data-scroll>
                 <img
                   className="benefit-card__icon"
                   src={benefit.icon}
@@ -495,15 +496,15 @@ function Home() {
 
       <section className="testimonials" id="testimonials">
         <div className="testimonials__wrapper">
-          <div className="testimonials__tag">Review</div>
-          <h2 className="testimonials__title">What do people say about us</h2>
-          <p className="testimonials__description">
+          <div className="testimonials__tag" data-scroll>Review</div>
+          <h2 className="testimonials__title" data-scroll>What do people say about us</h2>
+          <p className="testimonials__description" data-scroll>
             Over 10,000 satisfied customers across households, corporate
             offices, and manufacturing units have reduced their electricity
             costs with our products
           </p>
           <div className="testimonials__grid">
-            <article className="testimonial-card">
+            <article className="testimonial-card" data-scroll>
               <div className="testimonial-card__header">
                 <div className="testimonial-card__avatar">
                   <div className="testimonial-card__avatar-placeholder">RK</div>
@@ -527,7 +528,7 @@ function Home() {
                 household!"
               </p>
             </article>
-            <article className="testimonial-card">
+            <article className="testimonial-card" data-scroll>
               <div className="testimonial-card__header">
                 <div className="testimonial-card__avatar">
                   <div className="testimonial-card__avatar-placeholder">PS</div>
@@ -551,7 +552,7 @@ function Home() {
                 satisfied with the purchase!"
               </p>
             </article>
-            <article className="testimonial-card">
+            <article className="testimonial-card" data-scroll>
               <div className="testimonial-card__header">
                 <div className="testimonial-card__avatar">
                   <div className="testimonial-card__avatar-placeholder">AP</div>
@@ -719,12 +720,12 @@ function Home() {
               <Link to="/contact" className="footer__link">
                 Contact Us
               </Link>
-              <a href="#privacy" className="footer__link">
+              <Link to="/privacy" className="footer__link">
                 Privacy Policy
-              </a>
-              <a href="#terms" className="footer__link">
-                Terms of Use
-              </a>
+              </Link>
+              <Link to="/terms" className="footer__link">
+                Terms & Conditions
+              </Link>
             </nav>
           </div>
         </div>

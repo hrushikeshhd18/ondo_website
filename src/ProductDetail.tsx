@@ -4,6 +4,8 @@ import "./App.css";
 import logo from "../assets/logo.png";
 import homePowerSaverImage from "../assets/Home_power_saver_image.png";
 import industrialPowerSaverImage from "../assets/industrial_power_saver_image.png";
+import illustrationImage from "../assets/illustration_one_and_two.png";
+import ondoHeroProduct from "../assets/ondo_hero_product_image.png";
 import residentialHomesIcon from "../assets/residential_homes.png";
 import commercialSpacesIcon from "../assets/commercial_spaces.png";
 import industrialPlantsIcon from "../assets/small_scale_industrial_plants.png";
@@ -44,6 +46,12 @@ const productConfigs = {
     title: "Power Saver & Protector for Home",
     price: "₹ 12,000.00",
     image: homePowerSaverImage,
+    images: [
+      homePowerSaverImage,
+      ondoHeroProduct,
+      illustrationImage,
+      homePowerSaverImage,
+    ],
     quantityLabel: "Quantity",
     primaryCta: "Buy Now",
     secondaryCta: "Contact Sales Person",
@@ -66,6 +74,12 @@ const productConfigs = {
     title: "Power Saver for Commercial/Industrial",
     price: "₹ 25,000.00",
     image: industrialPowerSaverImage,
+    images: [
+      industrialPowerSaverImage,
+      ondoHeroProduct,
+      illustrationImage,
+      industrialPowerSaverImage,
+    ],
     quantityLabel: "Variants",
     primaryCta: "Request Technical Visit",
     secondaryCta: "Contact Sales Person",
@@ -94,6 +108,7 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [activeVariant, setActiveVariant] = useState("Mini");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [formName, setFormName] = useState("");
   const [formPhone, setFormPhone] = useState("+91 9878987898");
   const [formAddress, setFormAddress] = useState("");
@@ -142,7 +157,11 @@ function ProductDetail() {
 
   return (
     <>
-      <header className={`hero__nav hero__nav--white ${isMenuOpen ? "hero__nav--open" : ""}`}>
+      <header
+        className={`hero__nav hero__nav--white ${
+          isMenuOpen ? "hero__nav--open" : ""
+        }`}
+      >
         <Link className="hero__brand" to="/">
           <img src={logo} alt="Ondo logo" />
         </Link>
@@ -181,10 +200,17 @@ function ProductDetail() {
             )}
           </nav>
           <div className="hero__actions">
-            <Link to="/contact" className="btn btn--primary" onClick={handleNavItemClick}>
+            <Link
+              to="/contact"
+              className="btn btn--primary"
+              onClick={handleNavItemClick}
+            >
               Contact Us
             </Link>
-            <button className="btn btn--ghost btn--ghost-dark" onClick={handleNavItemClick}>
+            <button
+              className="btn btn--ghost btn--ghost-dark"
+              onClick={handleNavItemClick}
+            >
               Login
             </button>
           </div>
@@ -197,26 +223,49 @@ function ProductDetail() {
             <div className="product-detail__main">
               <div className="product-detail__image-panel">
                 <div className="product-detail__image-card">
-                  <img src={product.image} alt={product.title} />
+                  <img
+                    src={product.images[selectedImageIndex]}
+                    alt={`${product.title} - Image ${selectedImageIndex + 1}`}
+                  />
                 </div>
                 <div className="product-detail__thumbnail-row">
                   <button
                     type="button"
                     className="product-detail__thumbnail-nav product-detail__thumbnail-nav--prev"
                     aria-label="Previous thumbnail"
+                    onClick={() => {
+                      setSelectedImageIndex((prev) =>
+                        prev > 0 ? prev - 1 : product.images.length - 1
+                      );
+                    }}
                   >
                     ←
                   </button>
-                  <div className="product-detail__thumbnail product-detail__thumbnail--active">
-                    <img src={product.image} alt={product.title} />
-                  </div>
-                  <div className="product-detail__thumbnail-placeholder" />
-                  <div className="product-detail__thumbnail-placeholder" />
-                  <div className="product-detail__thumbnail-placeholder" />
+                  {product.images.map((img, index) => (
+                    <div
+                      key={index}
+                      className={`product-detail__thumbnail ${
+                        selectedImageIndex === index
+                          ? "product-detail__thumbnail--active"
+                          : ""
+                      }`}
+                      onClick={() => setSelectedImageIndex(index)}
+                    >
+                      <img
+                        src={img}
+                        alt={`${product.title} thumbnail ${index + 1}`}
+                      />
+                    </div>
+                  ))}
                   <button
                     type="button"
                     className="product-detail__thumbnail-nav product-detail__thumbnail-nav--next"
                     aria-label="Next thumbnail"
+                    onClick={() => {
+                      setSelectedImageIndex((prev) =>
+                        prev < product.images.length - 1 ? prev + 1 : 0
+                      );
+                    }}
                   >
                     →
                   </button>
@@ -361,8 +410,9 @@ function ProductDetail() {
                         <div className="product-detail__installation-content">
                           <h4>Site Visit</h4>
                           <p>
-                            Once we receive your interest, our technical team will visit
-                            the site and assess the required Power Save variant.
+                            Once we receive your interest, our technical team
+                            will visit the site and assess the required Power
+                            Save variant.
                           </p>
                         </div>
                       </div>
@@ -375,8 +425,8 @@ function ProductDetail() {
                         <div className="product-detail__installation-content">
                           <h4>Place Order</h4>
                           <p>
-                            After placing the order for your preferred variant, we will
-                            begin with processing your order dispatch.
+                            After placing the order for your preferred variant,
+                            we will begin with processing your order dispatch.
                           </p>
                         </div>
                       </div>
@@ -389,8 +439,9 @@ function ProductDetail() {
                         <div className="product-detail__installation-content">
                           <h4>Installation</h4>
                           <p>
-                            Once the device reaches your doorstep, our installation team
-                            begins with installing the device free of cost.
+                            Once the device reaches your doorstep, our
+                            installation team begins with installing the device
+                            free of cost.
                           </p>
                         </div>
                       </div>
@@ -467,7 +518,9 @@ function ProductDetail() {
                 onSubmit={handleSubmitModal}
               >
                 <label className="product-detail-modal__field">
-                  <span className="product-detail-modal__field-label">Name</span>
+                  <span className="product-detail-modal__field-label">
+                    Name
+                  </span>
                   <input
                     type="text"
                     placeholder="Enter your name"
@@ -476,7 +529,9 @@ function ProductDetail() {
                   />
                 </label>
                 <label className="product-detail-modal__field">
-                  <span className="product-detail-modal__field-label">Mobile Number</span>
+                  <span className="product-detail-modal__field-label">
+                    Mobile Number
+                  </span>
                   <input
                     type="tel"
                     placeholder="+91 9878987898"
@@ -699,12 +754,12 @@ function ProductDetail() {
               <Link to="/contact" className="footer__link">
                 Contact Us
               </Link>
-              <a href="#privacy" className="footer__link">
+              <Link to="/privacy" className="footer__link">
                 Privacy Policy
-              </a>
-              <a href="#terms" className="footer__link">
-                Terms of Use
-              </a>
+              </Link>
+              <Link to="/terms" className="footer__link">
+                Terms & Conditions
+              </Link>
             </nav>
           </div>
         </div>

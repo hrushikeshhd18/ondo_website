@@ -695,23 +695,12 @@ a.btn:focus {
     gap: 2.5rem;
     overflow-y: auto;
     z-index: 99;
-    animation: slideInFromRight 0.3s ease-out;
   }
 
   .hero__nav--white .hero__nav-main {
     background: rgba(255, 255, 255, 0.98);
   }
 
-  @keyframes slideInFromRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
 
   .hero__nav--open .hero__nav-main {
     display: flex;
@@ -2202,6 +2191,9 @@ a.btn:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
 }
 
 .product-detail__image-card img {
@@ -2209,6 +2201,7 @@ a.btn:focus {
   max-width: 360px;
   height: auto;
   object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .product-detail__thumbnail-row {
@@ -2217,17 +2210,25 @@ a.btn:focus {
   gap: 0.75rem;
 }
 
-.product-detail__thumbnail,
-.product-detail__thumbnail-placeholder {
+.product-detail__thumbnail {
   flex: 1;
   border-radius: 18px;
   background: #f5f5f5;
   height: 80px;
   border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.product-detail__thumbnail:hover {
+  border-color: #0066ff;
+  transform: scale(1.05);
 }
 
 .product-detail__thumbnail--active {
   border-color: #0066ff;
+  border-width: 2px;
 }
 
 .product-detail__thumbnail img {
@@ -2235,6 +2236,11 @@ a.btn:focus {
   height: 100%;
   object-fit: cover;
   border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.product-detail__thumbnail:hover img {
+  transform: scale(1.1);
 }
 
 .product-detail__thumbnail-nav {
@@ -3053,7 +3059,6 @@ a.btn:focus {
     gap: 2.5rem;
     overflow-y: auto;
     z-index: 99;
-    animation: slideInFromRight 0.3s ease-out;
     box-shadow: none;
     border-top: none;
   }
@@ -3483,168 +3488,119 @@ a.btn:focus {
   }
 }
 
-/* Simple Subtle Animations for Home Page */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* Legal Pages (Privacy Policy & Terms & Conditions) */
+.legal-page {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.legal-page__wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+.legal-page__title {
+  font-family: 'Uber Move', 'Uber Move Text', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 48px);
+  line-height: 120%;
+  color: #000000;
+  margin: 0 0 0.5rem 0;
+}
+
+.legal-page__last-updated {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #666666;
+  margin: 0 0 clamp(3rem, 6vw, 4rem) 0;
+}
+
+.legal-page__section {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.legal-page__heading {
+  font-family: 'Uber Move', 'Uber Move Text', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3vw, 24px);
+  line-height: 140%;
+  color: #000000;
+  margin: 0 0 1rem 0;
+}
+
+.legal-page__paragraph {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 160%;
+  color: #000000;
+  margin: 0 0 1rem 0;
+}
+
+.legal-page__list {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 160%;
+  color: #000000;
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.legal-page__list li {
+  margin-bottom: 0.75rem;
+}
+
+.legal-page__list li:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .legal-page__wrapper {
+    padding: 2rem 1.5rem;
   }
-  to {
-    opacity: 1;
+
+  .legal-page__title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-page__last-updated {
+    font-size: 13px;
+    margin-bottom: 2rem;
+  }
+
+  .legal-page__heading {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+  }
+
+  .legal-page__paragraph,
+  .legal-page__list {
+    font-size: 15px;
+  }
+
+  .legal-page__list {
+    padding-left: 1.25rem;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Hero Section Entrance Animations - Simple and Subtle */
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-up-delay {
-  animation: fadeInUp 0.6s ease-out 0.15s forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-up-delay-2 {
-  animation: fadeInUp 0.6s ease-out 0.3s forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-up-delay-3 {
-  animation: fadeInUp 0.6s ease-out 0.45s forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-right {
-  animation: fadeInRight 0.8s ease-out 0.2s forwards;
-  opacity: 0;
-}
-
-/* Simple Scroll-triggered Animations */
-.scroll-animate {
+/* Simple Scroll Animations */
+[data-scroll] {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.scroll-animate.animate-in {
+[data-scroll].is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Staggered animations for cards - subtle */
-.feature-card.scroll-animate.animate-in,
-.imes-feature-card.scroll-animate.animate-in,
-.product-card.scroll-animate.animate-in {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-/* Mission section animation */
-.mission.scroll-animate.animate-in {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-/* Products section animation */
-.products__tag.scroll-animate.animate-in,
-.products__title.scroll-animate.animate-in {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-.products__description.scroll-animate.animate-in {
-  animation: fadeInUp 0.5s ease-out 0.1s forwards;
-}
-
-/* Features section animations */
-.features__tag.scroll-animate.animate-in,
-.features__title.scroll-animate.animate-in {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-/* About section animations */
-.about__intro.scroll-animate.animate-in {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-/* Card Hover and Elevate States - Smooth */
-.feature-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
-
-.imes-feature-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.imes-feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-.product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-}
-
-/* Reduce motion for users who prefer it */
+/* Respect user preferences for reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-in,
-  .animate-fade-in-up,
-  .animate-fade-in-up-delay,
-  .animate-fade-in-up-delay-2,
-  .animate-fade-in-up-delay-3,
-  .animate-fade-in-right,
-  .scroll-animate {
-    animation: none;
+  [data-scroll] {
     opacity: 1;
     transform: none;
     transition: none;
   }
-
-  .scroll-animate.animate-in {
-    opacity: 1;
-    transform: none;
-  }
-
-  .feature-card:hover,
-  .imes-feature-card:hover,
-  .product-card:hover {
-    transform: none;
-  }
 }
+

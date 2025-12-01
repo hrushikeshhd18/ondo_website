@@ -511,12 +511,12 @@ function AboutUs() {
               <Link to="/contact" className="footer__link">
                 Contact Us
               </Link>
-              <a href="#privacy" className="footer__link">
+              <Link to="/privacy" className="footer__link">
                 Privacy Policy
-              </a>
-              <a href="#terms" className="footer__link">
-                Terms of Use
-              </a>
+              </Link>
+              <Link to="/terms" className="footer__link">
+                Terms & Conditions
+              </Link>
             </nav>
           </div>
         </div>

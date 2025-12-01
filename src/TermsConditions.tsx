@@ -2,49 +2,19 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import logo from "../assets/logo.png";
-import homePowerSaverImage from "../assets/Home_power_saver_image.png";
-import industrialPowerSaverImage from "../assets/industrial_power_saver_image.png";
-import residentialHomesIcon from "../assets/residential_homes.png";
-import commercialSpacesIcon from "../assets/commercial_spaces.png";
-import industrialPlantsIcon from "../assets/small_scale_industrial_plants.png";
-import retailEstablishmentsIcon from "../assets/retail_establishments_icon.png";
-import illustrationImage from "../assets/illustration_one_and_two.png";
 
-const productUseCases = [
-  {
-    icon: residentialHomesIcon,
-    alt: "Residential homes icon",
-    title: "Residential Homes",
-  },
-  {
-    icon: commercialSpacesIcon,
-    alt: "Commercial spaces icon",
-    title: "Commercial Spaces",
-  },
-  {
-    icon: industrialPlantsIcon,
-    alt: "Small scale industrial plants icon",
-    title: "Small Scale Industrial Plants",
-  },
-  {
-    icon: retailEstablishmentsIcon,
-    alt: "Retail establishments icon",
-    title: "Retail Establishments",
-  },
-];
-
-const navLinks = [
-  { label: "Home", href: "/", isLink: true },
-  { label: "About Us", href: "/about", isLink: true },
-  { label: "Products", href: "/products", isLink: true },
-];
-
-function Products() {
+function TermsConditions() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavItemClick = () => {
     setIsMenuOpen(false);
   };
+
+  const navLinks = [
+    { label: "Home", href: "/", isLink: true },
+    { label: "About Us", href: "/about", isLink: true },
+    { label: "Products", href: "/products", isLink: true },
+  ];
 
   return (
     <>
@@ -97,132 +67,104 @@ function Products() {
         </div>
       </header>
 
-      <main className="products-page">
-        <section className="products-page__intro">
-          <div className="products-page__intro-inner">
-            <h1 className="products-page__title">Products</h1>
-            <p className="products-page__subtitle">
-              Our product range is designed to save power, protect appliances,
-              and optimise energy usage across households, commercial
-              establishments, and industries.
+      <main className="legal-page">
+        <div className="legal-page__wrapper">
+          <h1 className="legal-page__title">Terms & Conditions</h1>
+          <p className="legal-page__last-updated">Last Updated: January 2025</p>
+
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">1. Installation after Confirmation of Payment</h2>
+            <p className="legal-page__paragraph">
+              Installation of our products will commence only after we have received confirmation of payment 
+              for your order. Once payment is confirmed, our technical team will contact you to schedule a 
+              convenient installation date. Please ensure that all payment obligations are fulfilled before 
+              expecting installation services.
             </p>
-          </div>
-        </section>
+          </section>
 
-        <section className="products-page__card-section">
-          <article className="products-page__card">
-            <div className="products-page__card-image">
-              <img
-                src={homePowerSaverImage}
-                alt="Power Saver & Protector for Home"
-              />
-            </div>
-            <div className="products-page__card-content">
-              <h2 className="products-page__card-heading">For Home</h2>
-              <h3 className="products-page__card-title">
-                Power Saver &amp; Protector
-              </h3>
-              <ol className="products-page__card-list">
-                <li>Shields appliances from sudden voltage spikes</li>
-                <li>Reduces power wastage in household wiring</li>
-                <li>Improves power factor &amp; efficiency</li>
-                <li>Protects against voltage fluctuations</li>
-                <li>Enhances appliance lifespan</li>
-                <li>Easy installation</li>
-                <li>Low maintenance, long-lasting</li>
-              </ol>
-              <Link
-                to="/products/home"
-                className="btn btn--primary products-page__card-cta products-page__card-cta-link"
-              >
-                See More Details
-              </Link>
-            </div>
-          </article>
-
-          <article className="products-page__card products-page__card--reverse">
-            <div className="products-page__card-image">
-              <img
-                src={industrialPowerSaverImage}
-                alt="Power Saver for Commercial/Industrial"
-              />
-            </div>
-            <div className="products-page__card-content">
-              <h2 className="products-page__card-heading">
-                For Commercial/Industrial
-              </h2>
-              <h3 className="products-page__card-title">Power Saver</h3>
-              <ol className="products-page__card-list">
-                <li>High-capacity energy optimization</li>
-                <li>Improves power factor &amp; efficiency</li>
-                <li>Provides stable power supply</li>
-                <li>Reduces electricity bills significantly</li>
-                <li>Provides stable power supply</li>
-                <li>Suitable for offices, shops, factories</li>
-              </ol>
-              <Link
-                to="/products/commercial"
-                className="btn btn--primary products-page__card-cta products-page__card-cta-link"
-              >
-                See More Details
-              </Link>
-            </div>
-          </article>
-        </section>
-
-        <section className="products-page__where">
-          <div className="products-page__where-inner">
-            <h2 className="products-page__where-title">Where you can use</h2>
-            <p className="products-page__where-subtitle">
-              Our product range is designed to save power, protect appliances,
-              and optimise energy usage across households, commercial
-              establishments, and industries.
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">2. Warranty Against Manufacturing Defect Only</h2>
+            <p className="legal-page__paragraph">
+              Our warranty covers only manufacturing defects. The warranty does not cover:
             </p>
-            <div className="products-page__where-grid">
-              {productUseCases.map((useCase) => (
-                <article
-                  className="products-page__where-card"
-                  key={useCase.title}
-                >
-                  <img src={useCase.icon} alt={useCase.alt} />
-                  <h3>{useCase.title}</h3>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+            <ul className="legal-page__list">
+              <li>Damage caused by misuse, abuse, or negligence</li>
+              <li>Damage resulting from accidents, natural disasters, or external factors</li>
+              <li>Normal wear and tear</li>
+              <li>Damage caused by unauthorized repairs or modifications</li>
+              <li>Damage due to improper installation (unless installed by our authorized technicians)</li>
+            </ul>
+            <p className="legal-page__paragraph">
+              If a manufacturing defect is identified, we will repair or replace the defective product at 
+              our discretion, subject to the terms of the warranty.
+            </p>
+          </section>
 
-        <section className="products-page__how">
-          <div className="products-page__how-inner">
-            <h2 className="products-page__how-title">How it works</h2>
-            <div className="products-page__how-layout">
-              <div className="products-page__how-text">
-                <p>
-                  Our products utilise cutting-edge technology to regulate
-                  voltage, reduce electrical surges, enhance power efficiency,
-                  and improve power factor, safeguarding your electrical systems
-                  from damage.
-                </p>
-                <p>
-                  By continuously monitoring and adjusting the flow of
-                  electricity, they ensure that only the necessary power is
-                  used, minimising energy waste and optimising performance.
-                </p>
-                <p>
-                  This results in efficient energy consumption, lower heat
-                  generation, and a longer lifespan for connected appliances.
-                </p>
-              </div>
-              <div className="products-page__how-illustrations">
-                <img
-                  src={illustrationImage}
-                  alt="The outcome: Lower electricity bills and reduced carbon footprint – illustrations"
-                  className="products-page__how-illustration-img"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">3. Warranty Will Start from Date of Invoice</h2>
+            <p className="legal-page__paragraph">
+              The warranty period begins from the date of invoice issuance, not from the date of installation 
+              or delivery. Please retain your invoice as proof of purchase and warranty coverage. The warranty 
+              period and terms are as specified in the product documentation provided with your purchase.
+            </p>
+          </section>
+
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">4. Order Once Placed Can't Be Cancelled</h2>
+            <p className="legal-page__paragraph">
+              Once an order has been placed and confirmed, it cannot be cancelled. This policy applies to all 
+              orders placed through our website, phone, or any other channel. We recommend that you carefully 
+              review your order details, product specifications, and requirements before completing your purchase.
+            </p>
+            <p className="legal-page__paragraph">
+              In exceptional circumstances, such as product unavailability or technical issues on our part, 
+              we reserve the right to cancel an order and provide a full refund. However, customer-initiated 
+              cancellations are not permitted after order confirmation.
+            </p>
+          </section>
+
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">5. All Disputes Subject to Kolhapur Jurisdiction Only</h2>
+            <p className="legal-page__paragraph">
+              Any disputes, claims, or legal proceedings arising from or related to these Terms & Conditions, 
+              our products, services, or your relationship with Ondo Solutions Private Limited shall be subject 
+              to the exclusive jurisdiction of the courts in Kolhapur, Maharashtra, India.
+            </p>
+            <p className="legal-page__paragraph">
+              By using our services and purchasing our products, you agree to submit to the jurisdiction of 
+              the courts in Kolhapur and waive any objection to venue in such courts.
+            </p>
+          </section>
+
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">6. General Terms</h2>
+            <p className="legal-page__paragraph">
+              By placing an order with Ondo Solutions Private Limited, you acknowledge that you have read, 
+              understood, and agree to be bound by these Terms & Conditions. We reserve the right to modify 
+              these terms at any time, and such modifications will be effective immediately upon posting on 
+              our website.
+            </p>
+            <p className="legal-page__paragraph">
+              If any provision of these Terms & Conditions is found to be invalid or unenforceable, the 
+              remaining provisions shall continue to be valid and enforceable to the fullest extent permitted 
+              by law.
+            </p>
+          </section>
+
+          <section className="legal-page__section">
+            <h2 className="legal-page__heading">7. Contact Information</h2>
+            <p className="legal-page__paragraph">
+              For any questions or concerns regarding these Terms & Conditions, please contact us at:
+            </p>
+            <p className="legal-page__paragraph">
+              <strong>Ondo Solutions Private Limited</strong><br />
+              Email: info@ondosolutions.com<br />
+              Phone: +91-XXXXXXXXXX<br />
+              Address: [Your Company Address]<br />
+              Jurisdiction: Kolhapur, Maharashtra, India
+            </p>
+          </section>
+        </div>
       </main>
 
       <footer className="footer">
@@ -382,4 +324,5 @@ function Products() {
   );
 }
 
-export default Products;
+export default TermsConditions;
+

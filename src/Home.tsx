@@ -84,20 +84,6 @@ const imesFeatures = [
       "Maintains steady voltage supply to protect equipment from voltage fluctuations. Increases operational life of electrical appliances and machinery.",
   },
   {
-    icon: loadBalancingIcon,
-    alt: "Load balancing icon",
-    titleLines: ["Load Balancing &", "Energy Distribution"],
-    description:
-      "Manages uneven load distribution across multiple phases. Ensures balanced operation and reduces system losses.",
-  },
-  {
-    icon: harmonicFiltrationIcon,
-    alt: "Harmonic filtration icon",
-    titleLines: ["Harmonic Filtration", "& Reduction"],
-    description:
-      "Filters out unwanted harmonics caused by electronic loads. Improves power quality and system performance.",
-  },
-  {
     icon: realTimeMonitoringIcon,
     alt: "Real-time energy monitoring icon",
     titleLines: ["Real-Time Energy", "Monitoring"],

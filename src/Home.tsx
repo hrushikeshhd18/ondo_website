@@ -22,7 +22,7 @@ import residentialHomesIcon from "../assets/residential_homes.png";
 import commercialSpacesIcon from "../assets/commercial_spaces.png";
 import industrialPlantsIcon from "../assets/small_scale_industrial_plants.png";
 import retailEstablishmentsIcon from "../assets/retail_establishments_icon.png";
-import costSavingsIcon from "../assets/cost_savings.png";
+import costSavingsIcon from "../assets/money_card_icon.png";
 import safetyFirstIcon from "../assets/safety_first_card_icon.png";
 import userFriendlyIcon from "../assets/user_friendly_card_icon.png";
 import customerSupportIcon from "../assets/customer_supoort_icon.png";

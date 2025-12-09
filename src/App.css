@@ -2191,9 +2191,6 @@ a.btn:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  min-height: 400px;
 }
 
 .product-detail__image-card img {
@@ -2201,7 +2198,6 @@ a.btn:focus {
   max-width: 360px;
   height: auto;
   object-fit: contain;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .product-detail__thumbnail-row {
@@ -2210,25 +2206,17 @@ a.btn:focus {
   gap: 0.75rem;
 }
 
-.product-detail__thumbnail {
+.product-detail__thumbnail,
+.product-detail__thumbnail-placeholder {
   flex: 1;
   border-radius: 18px;
   background: #f5f5f5;
   height: 80px;
   border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  overflow: hidden;
-}
-
-.product-detail__thumbnail:hover {
-  border-color: #0066ff;
-  transform: scale(1.05);
 }
 
 .product-detail__thumbnail--active {
   border-color: #0066ff;
-  border-width: 2px;
 }
 
 .product-detail__thumbnail img {
@@ -2236,11 +2224,6 @@ a.btn:focus {
   height: 100%;
   object-fit: cover;
   border-radius: 16px;
-  transition: transform 0.3s ease;
-}
-
-.product-detail__thumbnail:hover img {
-  transform: scale(1.1);
 }
 
 .product-detail__thumbnail-nav {
@@ -3485,122 +3468,6 @@ a.btn:focus {
 
   .product-detail-modal__btn {
     width: 100%;
-  }
-}
-
-/* Legal Pages (Privacy Policy & Terms & Conditions) */
-.legal-page {
-  background: #ffffff;
-  min-height: 100vh;
-}
-
-.legal-page__wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
-}
-
-.legal-page__title {
-  font-family: 'Uber Move', 'Uber Move Text', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2rem, 5vw, 48px);
-  line-height: 120%;
-  color: #000000;
-  margin: 0 0 0.5rem 0;
-}
-
-.legal-page__last-updated {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  color: #666666;
-  margin: 0 0 clamp(3rem, 6vw, 4rem) 0;
-}
-
-.legal-page__section {
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.legal-page__heading {
-  font-family: 'Uber Move', 'Uber Move Text', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.25rem, 3vw, 24px);
-  line-height: 140%;
-  color: #000000;
-  margin: 0 0 1rem 0;
-}
-
-.legal-page__paragraph {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 16px;
-  line-height: 160%;
-  color: #000000;
-  margin: 0 0 1rem 0;
-}
-
-.legal-page__list {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 16px;
-  line-height: 160%;
-  color: #000000;
-  margin: 0 0 1rem 0;
-  padding-left: 1.5rem;
-}
-
-.legal-page__list li {
-  margin-bottom: 0.75rem;
-}
-
-.legal-page__list li:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  .legal-page__wrapper {
-    padding: 2rem 1.5rem;
-  }
-
-  .legal-page__title {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-    margin-bottom: 0.5rem;
-  }
-
-  .legal-page__last-updated {
-    font-size: 13px;
-    margin-bottom: 2rem;
-  }
-
-  .legal-page__heading {
-    font-size: clamp(1.1rem, 4vw, 1.5rem);
-  }
-
-  .legal-page__paragraph,
-  .legal-page__list {
-    font-size: 15px;
-  }
-
-  .legal-page__list {
-    padding-left: 1.25rem;
-  }
-}
-
-/* Simple Scroll Animations */
-[data-scroll] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-scroll].is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Respect user preferences for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  [data-scroll] {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 }
 

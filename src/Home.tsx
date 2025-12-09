@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import heroBackground from "../assets/hero_background.jpg";
-import heroProduct from "../assets/ondo_hero_product_image.png";
 import logo from "../assets/logo.png";
 import energyIcon from "../assets/energy_efficient_icon.png";
 import durabilityIcon from "../assets/long_durablity_icon.png";
@@ -34,7 +33,7 @@ import certificationIcon from "../assets/certification_card_icon.png";
 
 const navLinks = [
   { label: "Home", href: "/", isLink: true },
-  { label: "About Us", href: "/about", isLink: true },
+  { label: "About us", href: "/about", isLink: true },
   { label: "Products", href: "/products", isLink: true },
 ];
 
@@ -283,7 +282,11 @@ function Home() {
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="hero__overlay" />
-        <header className={`hero__nav ${isMenuOpen ? "hero__nav--open" : ""}`}>
+        <header
+          className={`hero__nav hero__nav--white ${
+            isMenuOpen ? "hero__nav--open" : ""
+          }`}
+        >
           <Link className="hero__brand" to="/">
             <img src={logo} alt="Ondo logo" />
           </Link>
@@ -322,12 +325,22 @@ function Home() {
               )}
             </nav>
             <div className="hero__actions">
-              <Link to="/contact" className="btn btn--primary" onClick={handleNavItemClick}>
-                Contact Us
+              <Link
+                to="/contact"
+                className="btn btn--primary"
+                onClick={handleNavItemClick}
+              >
+                Contact us
               </Link>
-              <button className="btn btn--ghost" onClick={handleNavItemClick}>
+              <a
+                href="http://ondosolutions.store"
+                className="btn btn--ghost"
+                onClick={handleNavItemClick}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Login
-              </button>
+              </a>
             </div>
           </div>
         </header>
@@ -340,13 +353,9 @@ function Home() {
               Reduce electricity bills, protect your appliances, and contribute
               to a greener future with our advanced power saver solutions.
             </p>
-            <Link to="/contact" className="btn btn--primary hero__cta">Contact Us</Link>
-          </div>
-
-          <div className="hero__visual">
-            <div className="hero__product-card">
-              <img src={heroProduct} alt="Ondo smart energy controller" />
-            </div>
+            <Link to="/contact" className="btn btn--primary hero__cta">
+              Contact us
+            </Link>
           </div>
         </main>
       </section>
@@ -366,7 +375,11 @@ function Home() {
 
           <div className="about__cards">
             {featureCards.map((card) => (
-              <article className="feature-card" key={card.titleLines.join("-")} data-scroll>
+              <article
+                className="feature-card"
+                key={card.titleLines.join("-")}
+                data-scroll
+              >
                 <img
                   className="feature-card__icon"
                   src={card.icon}
@@ -384,7 +397,11 @@ function Home() {
         </div>
       </section>
 
-      <section className="mission" aria-labelledby="mission-heading" data-scroll>
+      <section
+        className="mission"
+        aria-labelledby="mission-heading"
+        data-scroll
+      >
         <div className="mission__tag">Our Mission</div>
         <p className="mission__statement" id="mission-heading">
           We <span>innovate</span> to empower every home and industry with
@@ -394,8 +411,12 @@ function Home() {
 
       <section className="features" id="features">
         <div className="features__wrapper">
-          <div className="features__tag" data-scroll>Features</div>
-          <h2 className="features__title" data-scroll>Key Features of IMES Device</h2>
+          <div className="features__tag" data-scroll>
+            Features
+          </div>
+          <h2 className="features__title" data-scroll>
+            Key Features of IEMS Device
+          </h2>
           <div className="features__grid">
             {imesFeatures.map((feature, index) => (
               <article className="imes-feature-card" key={index} data-scroll>
@@ -420,8 +441,12 @@ function Home() {
 
       <section className="products" id="products">
         <div className="products__wrapper">
-          <div className="products__tag" data-scroll>Products</div>
-          <h2 className="products__title" data-scroll>Our Offerings</h2>
+          <div className="products__tag" data-scroll>
+            Products
+          </div>
+          <h2 className="products__title" data-scroll>
+            Our Offerings
+          </h2>
           <p className="products__description" data-scroll>
             Our product range is designed to save power, protect appliances, and
             optimize energy usage across households, commercial establishments,
@@ -440,7 +465,10 @@ function Home() {
                     <li key={featureIndex}>{feature}</li>
                   ))}
                 </ol>
-                <Link to="/contact" className="btn btn--primary product-card__cta">
+                <Link
+                  to="/contact"
+                  className="btn btn--primary product-card__cta"
+                >
                   Contact Us
                 </Link>
               </div>
@@ -451,7 +479,9 @@ function Home() {
 
       <section className="use-cases" id="use-cases">
         <div className="use-cases__wrapper">
-          <h2 className="use-cases__title" data-scroll>Where you can use</h2>
+          <h2 className="use-cases__title" data-scroll>
+            Where you can use
+          </h2>
           <p className="use-cases__description" data-scroll>
             Our product range is designed to save power, protect appliances, and
             optimize energy usage across households, commercial establishments,
@@ -474,8 +504,12 @@ function Home() {
 
       <section className="benefits" id="benefits">
         <div className="benefits__wrapper">
-          <div className="benefits__tag" data-scroll>Benefits</div>
-          <h2 className="benefits__title" data-scroll>Why Choose Us</h2>
+          <div className="benefits__tag" data-scroll>
+            Benefits
+          </div>
+          <h2 className="benefits__title" data-scroll>
+            Why Choose Us
+          </h2>
           <div className="benefits__grid">
             {benefits.map((benefit, index) => (
               <article className="benefit-card" key={index} data-scroll>
@@ -496,8 +530,12 @@ function Home() {
 
       <section className="testimonials" id="testimonials">
         <div className="testimonials__wrapper">
-          <div className="testimonials__tag" data-scroll>Review</div>
-          <h2 className="testimonials__title" data-scroll>What do people say about us</h2>
+          <div className="testimonials__tag" data-scroll>
+            Review
+          </div>
+          <h2 className="testimonials__title" data-scroll>
+            What do people say about us
+          </h2>
           <p className="testimonials__description" data-scroll>
             Over 10,000 satisfied customers across households, corporate
             offices, and manufacturing units have reduced their electricity
@@ -712,13 +750,13 @@ function Home() {
             <h3 className="footer__heading">Company</h3>
             <nav className="footer__links">
               <Link to="/about" className="footer__link">
-                About Us
+                About us
               </Link>
               <a href="#products" className="footer__link">
                 Products and Solutions
               </a>
               <Link to="/contact" className="footer__link">
-                Contact Us
+                Contact us
               </Link>
               <Link to="/privacy" className="footer__link">
                 Privacy Policy

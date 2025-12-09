@@ -12,13 +12,17 @@ function TermsConditions() {
 
   const navLinks = [
     { label: "Home", href: "/", isLink: true },
-    { label: "About Us", href: "/about", isLink: true },
+    { label: "About us", href: "/about", isLink: true },
     { label: "Products", href: "/products", isLink: true },
   ];
 
   return (
     <>
-      <header className={`hero__nav hero__nav--white ${isMenuOpen ? "hero__nav--open" : ""}`}>
+      <header
+        className={`hero__nav hero__nav--white ${
+          isMenuOpen ? "hero__nav--open" : ""
+        }`}
+      >
         <Link className="hero__brand" to="/">
           <img src={logo} alt="Ondo logo" />
         </Link>
@@ -57,12 +61,22 @@ function TermsConditions() {
             )}
           </nav>
           <div className="hero__actions">
-            <Link to="/contact" className="btn btn--primary" onClick={handleNavItemClick}>
-              Contact Us
+            <Link
+              to="/contact"
+              className="btn btn--primary"
+              onClick={handleNavItemClick}
+            >
+              Contact us
             </Link>
-            <button className="btn btn--ghost btn--ghost-dark" onClick={handleNavItemClick}>
+            <a
+              href="http://ondosolutions.store"
+              className="btn btn--ghost btn--ghost-dark"
+              onClick={handleNavItemClick}
+              target="_blank"
+              rel="noreferrer"
+            >
               Login
-            </button>
+            </a>
           </div>
         </div>
       </header>
@@ -73,94 +87,128 @@ function TermsConditions() {
           <p className="legal-page__last-updated">Last Updated: January 2025</p>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">1. Installation after Confirmation of Payment</h2>
+            <h2 className="legal-page__heading">
+              1. Installation after Confirmation of Payment
+            </h2>
             <p className="legal-page__paragraph">
-              Installation of our products will commence only after we have received confirmation of payment 
-              for your order. Once payment is confirmed, our technical team will contact you to schedule a 
-              convenient installation date. Please ensure that all payment obligations are fulfilled before 
-              expecting installation services.
+              Installation of our products will commence only after we have
+              received confirmation of payment for your order. Once payment is
+              confirmed, our technical team will contact you to schedule a
+              convenient installation date. Please ensure that all payment
+              obligations are fulfilled before expecting installation services.
             </p>
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">2. Warranty Against Manufacturing Defect Only</h2>
+            <h2 className="legal-page__heading">
+              2. Warranty Against Manufacturing Defect Only
+            </h2>
             <p className="legal-page__paragraph">
-              Our warranty covers only manufacturing defects. The warranty does not cover:
+              Our warranty covers only manufacturing defects. The warranty does
+              not cover:
             </p>
             <ul className="legal-page__list">
               <li>Damage caused by misuse, abuse, or negligence</li>
-              <li>Damage resulting from accidents, natural disasters, or external factors</li>
+              <li>
+                Damage resulting from accidents, natural disasters, or external
+                factors
+              </li>
               <li>Normal wear and tear</li>
               <li>Damage caused by unauthorized repairs or modifications</li>
-              <li>Damage due to improper installation (unless installed by our authorized technicians)</li>
+              <li>
+                Damage due to improper installation (unless installed by our
+                authorized technicians)
+              </li>
             </ul>
             <p className="legal-page__paragraph">
-              If a manufacturing defect is identified, we will repair or replace the defective product at 
-              our discretion, subject to the terms of the warranty.
+              If a manufacturing defect is identified, we will repair or replace
+              the defective product at our discretion, subject to the terms of
+              the warranty.
             </p>
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">3. Warranty Will Start from Date of Invoice</h2>
+            <h2 className="legal-page__heading">
+              3. Warranty Will Start from Date of Invoice
+            </h2>
             <p className="legal-page__paragraph">
-              The warranty period begins from the date of invoice issuance, not from the date of installation 
-              or delivery. Please retain your invoice as proof of purchase and warranty coverage. The warranty 
-              period and terms are as specified in the product documentation provided with your purchase.
+              The warranty period begins from the date of invoice issuance, not
+              from the date of installation or delivery. Please retain your
+              invoice as proof of purchase and warranty coverage. The warranty
+              period and terms are as specified in the product documentation
+              provided with your purchase.
             </p>
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">4. Order Once Placed Can't Be Cancelled</h2>
+            <h2 className="legal-page__heading">
+              4. Order Once Placed Can't Be Cancelled
+            </h2>
             <p className="legal-page__paragraph">
-              Once an order has been placed and confirmed, it cannot be cancelled. This policy applies to all 
-              orders placed through our website, phone, or any other channel. We recommend that you carefully 
-              review your order details, product specifications, and requirements before completing your purchase.
+              Once an order has been placed and confirmed, it cannot be
+              cancelled. This policy applies to all orders placed through our
+              website, phone, or any other channel. We recommend that you
+              carefully review your order details, product specifications, and
+              requirements before completing your purchase.
             </p>
             <p className="legal-page__paragraph">
-              In exceptional circumstances, such as product unavailability or technical issues on our part, 
-              we reserve the right to cancel an order and provide a full refund. However, customer-initiated 
+              In exceptional circumstances, such as product unavailability or
+              technical issues on our part, we reserve the right to cancel an
+              order and provide a full refund. However, customer-initiated
               cancellations are not permitted after order confirmation.
             </p>
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">5. All Disputes Subject to Kolhapur Jurisdiction Only</h2>
+            <h2 className="legal-page__heading">
+              5. All Disputes Subject to Kolhapur Jurisdiction Only
+            </h2>
             <p className="legal-page__paragraph">
-              Any disputes, claims, or legal proceedings arising from or related to these Terms & Conditions, 
-              our products, services, or your relationship with Ondo Solutions Private Limited shall be subject 
-              to the exclusive jurisdiction of the courts in Kolhapur, Maharashtra, India.
+              Any disputes, claims, or legal proceedings arising from or related
+              to these Terms & Conditions, our products, services, or your
+              relationship with Ondo Solutions Private Limited shall be subject
+              to the exclusive jurisdiction of the courts in Kolhapur,
+              Maharashtra, India.
             </p>
             <p className="legal-page__paragraph">
-              By using our services and purchasing our products, you agree to submit to the jurisdiction of 
-              the courts in Kolhapur and waive any objection to venue in such courts.
+              By using our services and purchasing our products, you agree to
+              submit to the jurisdiction of the courts in Kolhapur and waive any
+              objection to venue in such courts.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">6. General Terms</h2>
             <p className="legal-page__paragraph">
-              By placing an order with Ondo Solutions Private Limited, you acknowledge that you have read, 
-              understood, and agree to be bound by these Terms & Conditions. We reserve the right to modify 
-              these terms at any time, and such modifications will be effective immediately upon posting on 
-              our website.
+              By placing an order with Ondo Solutions Private Limited, you
+              acknowledge that you have read, understood, and agree to be bound
+              by these Terms & Conditions. We reserve the right to modify these
+              terms at any time, and such modifications will be effective
+              immediately upon posting on our website.
             </p>
             <p className="legal-page__paragraph">
-              If any provision of these Terms & Conditions is found to be invalid or unenforceable, the 
-              remaining provisions shall continue to be valid and enforceable to the fullest extent permitted 
-              by law.
+              If any provision of these Terms & Conditions is found to be
+              invalid or unenforceable, the remaining provisions shall continue
+              to be valid and enforceable to the fullest extent permitted by
+              law.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">7. Contact Information</h2>
             <p className="legal-page__paragraph">
-              For any questions or concerns regarding these Terms & Conditions, please contact us at:
+              For any questions or concerns regarding these Terms & Conditions,
+              please contact us at:
             </p>
             <p className="legal-page__paragraph">
-              <strong>Ondo Solutions Private Limited</strong><br />
-              Email: info@ondosolutions.com<br />
-              Phone: +91-XXXXXXXXXX<br />
-              Address: [Your Company Address]<br />
+              <strong>Ondo Solutions Private Limited</strong>
+              <br />
+              Email: info@ondosolutions.com
+              <br />
+              Phone: +91-XXXXXXXXXX
+              <br />
+              Address: [Your Company Address]
+              <br />
               Jurisdiction: Kolhapur, Maharashtra, India
             </p>
           </section>
@@ -325,4 +373,3 @@ function TermsConditions() {
 }
 
 export default TermsConditions;
-

@@ -25,7 +25,11 @@ function ContactUs() {
 
   return (
     <>
-      <header className={`hero__nav hero__nav--white ${isMenuOpen ? "hero__nav--open" : ""}`}>
+      <header
+        className={`hero__nav hero__nav--white ${
+          isMenuOpen ? "hero__nav--open" : ""
+        }`}
+      >
         <Link className="hero__brand" to="/">
           <img src={logo} alt="Ondo logo" />
         </Link>
@@ -43,17 +47,33 @@ function ContactUs() {
 
         <div className="hero__nav-main">
           <nav className="hero__links">
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
-            <Link to="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link>
-            <Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
+            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+              Home
+            </Link>
+            <Link to="/about" onClick={() => setIsMenuOpen(false)}>
+              About us
+            </Link>
+            <Link to="/products" onClick={() => setIsMenuOpen(false)}>
+              Products
+            </Link>
           </nav>
           <div className="hero__actions">
-            <Link to="/contact" className="btn btn--primary" onClick={() => setIsMenuOpen(false)}>
-              Contact Us
+            <Link
+              to="/contact"
+              className="btn btn--primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact us
             </Link>
-            <button className="btn btn--ghost btn--ghost-dark" onClick={() => setIsMenuOpen(false)}>
+            <a
+              href="http://ondosolutions.store"
+              className="btn btn--ghost btn--ghost-dark"
+              onClick={() => setIsMenuOpen(false)}
+              target="_blank"
+              rel="noreferrer"
+            >
               Login
-            </button>
+            </a>
           </div>
         </div>
       </header>
@@ -61,7 +81,7 @@ function ContactUs() {
       <main className="contact-us">
         <section className="contact-us__hero">
           <div className="contact-us__wrapper">
-            <div className="contact-us__tag">Contact Us</div>
+            <div className="contact-us__tag">Contact us</div>
             <h1 className="contact-us__title">
               Let's Build a Smarter Energy Future Together
             </h1>
@@ -82,7 +102,9 @@ function ContactUs() {
                     />
                   </label>
                   <label className="contact-us__field">
-                    <span className="contact-us__field-label">Office Address</span>
+                    <span className="contact-us__field-label">
+                      Office Address
+                    </span>
                     <input
                       type="text"
                       placeholder="Enter address"
@@ -303,4 +325,3 @@ function ContactUs() {
 }
 
 export default ContactUs;
-

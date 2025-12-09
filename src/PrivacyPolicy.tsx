@@ -12,13 +12,17 @@ function PrivacyPolicy() {
 
   const navLinks = [
     { label: "Home", href: "/", isLink: true },
-    { label: "About Us", href: "/about", isLink: true },
+    { label: "About us", href: "/about", isLink: true },
     { label: "Products", href: "/products", isLink: true },
   ];
 
   return (
     <>
-      <header className={`hero__nav hero__nav--white ${isMenuOpen ? "hero__nav--open" : ""}`}>
+      <header
+        className={`hero__nav hero__nav--white ${
+          isMenuOpen ? "hero__nav--open" : ""
+        }`}
+      >
         <Link className="hero__brand" to="/">
           <img src={logo} alt="Ondo logo" />
         </Link>
@@ -57,12 +61,22 @@ function PrivacyPolicy() {
             )}
           </nav>
           <div className="hero__actions">
-            <Link to="/contact" className="btn btn--primary" onClick={handleNavItemClick}>
-              Contact Us
+            <Link
+              to="/contact"
+              className="btn btn--primary"
+              onClick={handleNavItemClick}
+            >
+              Contact us
             </Link>
-            <button className="btn btn--ghost btn--ghost-dark" onClick={handleNavItemClick}>
+            <a
+              href="http://ondosolutions.store"
+              className="btn btn--ghost btn--ghost-dark"
+              onClick={handleNavItemClick}
+              target="_blank"
+              rel="noreferrer"
+            >
               Login
-            </button>
+            </a>
           </div>
         </div>
       </header>
@@ -75,38 +89,51 @@ function PrivacyPolicy() {
           <section className="legal-page__section">
             <h2 className="legal-page__heading">1. Introduction</h2>
             <p className="legal-page__paragraph">
-              Ondo Solutions Private Limited ("we," "our," or "us") is committed to protecting your privacy. 
-              This Privacy Policy explains how we collect, use, disclose, and safeguard your information when 
-              you visit our website and use our services.
+              Ondo Solutions Private Limited ("we," "our," or "us") is committed
+              to protecting your privacy. This Privacy Policy explains how we
+              collect, use, disclose, and safeguard your information when you
+              visit our website and use our services.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">2. Information We Collect</h2>
             <p className="legal-page__paragraph">
-              We may collect information that you provide directly to us, including:
+              We may collect information that you provide directly to us,
+              including:
             </p>
             <ul className="legal-page__list">
-              <li>Name and contact information (email address, phone number, mailing address)</li>
-              <li>Payment information (processed securely through third-party payment processors)</li>
+              <li>
+                Name and contact information (email address, phone number,
+                mailing address)
+              </li>
+              <li>
+                Payment information (processed securely through third-party
+                payment processors)
+              </li>
               <li>Product preferences and order history</li>
               <li>Communication preferences</li>
               <li>Any other information you choose to provide</li>
             </ul>
             <p className="legal-page__paragraph">
-              We also automatically collect certain information when you visit our website, such as your IP address, 
-              browser type, device information, and usage patterns.
+              We also automatically collect certain information when you visit
+              our website, such as your IP address, browser type, device
+              information, and usage patterns.
             </p>
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">3. How We Use Your Information</h2>
+            <h2 className="legal-page__heading">
+              3. How We Use Your Information
+            </h2>
             <p className="legal-page__paragraph">
               We use the information we collect to:
             </p>
             <ul className="legal-page__list">
               <li>Process and fulfill your orders</li>
-              <li>Communicate with you about your orders, products, and services</li>
+              <li>
+                Communicate with you about your orders, products, and services
+              </li>
               <li>Provide customer support and respond to your inquiries</li>
               <li>Send you marketing communications (with your consent)</li>
               <li>Improve our website and services</li>
@@ -116,32 +143,40 @@ function PrivacyPolicy() {
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">4. Information Sharing and Disclosure</h2>
+            <h2 className="legal-page__heading">
+              4. Information Sharing and Disclosure
+            </h2>
             <p className="legal-page__paragraph">
-              We do not sell your personal information. We may share your information with:
+              We do not sell your personal information. We may share your
+              information with:
             </p>
             <ul className="legal-page__list">
-              <li>Service providers who assist us in operating our website and conducting our business</li>
+              <li>
+                Service providers who assist us in operating our website and
+                conducting our business
+              </li>
               <li>Payment processors to process your transactions</li>
               <li>Shipping companies to deliver your orders</li>
-              <li>Legal authorities when required by law or to protect our rights</li>
+              <li>
+                Legal authorities when required by law or to protect our rights
+              </li>
             </ul>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">5. Data Security</h2>
             <p className="legal-page__paragraph">
-              We implement appropriate technical and organizational measures to protect your personal information 
-              against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission 
-              over the Internet or electronic storage is 100% secure.
+              We implement appropriate technical and organizational measures to
+              protect your personal information against unauthorized access,
+              alteration, disclosure, or destruction. However, no method of
+              transmission over the Internet or electronic storage is 100%
+              secure.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">6. Your Rights</h2>
-            <p className="legal-page__paragraph">
-              You have the right to:
-            </p>
+            <p className="legal-page__paragraph">You have the right to:</p>
             <ul className="legal-page__list">
               <li>Access and receive a copy of your personal information</li>
               <li>Correct inaccurate or incomplete information</li>
@@ -152,46 +187,58 @@ function PrivacyPolicy() {
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">7. Cookies and Tracking Technologies</h2>
+            <h2 className="legal-page__heading">
+              7. Cookies and Tracking Technologies
+            </h2>
             <p className="legal-page__paragraph">
-              We use cookies and similar tracking technologies to enhance your browsing experience, analyze website 
-              traffic, and personalize content. You can control cookie preferences through your browser settings.
+              We use cookies and similar tracking technologies to enhance your
+              browsing experience, analyze website traffic, and personalize
+              content. You can control cookie preferences through your browser
+              settings.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">8. Third-Party Links</h2>
             <p className="legal-page__paragraph">
-              Our website may contain links to third-party websites. We are not responsible for the privacy practices 
-              of these external sites. We encourage you to review their privacy policies.
+              Our website may contain links to third-party websites. We are not
+              responsible for the privacy practices of these external sites. We
+              encourage you to review their privacy policies.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">9. Children's Privacy</h2>
             <p className="legal-page__paragraph">
-              Our services are not intended for individuals under the age of 18. We do not knowingly collect 
-              personal information from children.
+              Our services are not intended for individuals under the age of 18.
+              We do not knowingly collect personal information from children.
             </p>
           </section>
 
           <section className="legal-page__section">
-            <h2 className="legal-page__heading">10. Changes to This Privacy Policy</h2>
+            <h2 className="legal-page__heading">
+              10. Changes to This Privacy Policy
+            </h2>
             <p className="legal-page__paragraph">
-              We may update this Privacy Policy from time to time. We will notify you of any changes by posting 
-              the new Privacy Policy on this page and updating the "Last Updated" date.
+              We may update this Privacy Policy from time to time. We will
+              notify you of any changes by posting the new Privacy Policy on
+              this page and updating the "Last Updated" date.
             </p>
           </section>
 
           <section className="legal-page__section">
             <h2 className="legal-page__heading">11. Contact Us</h2>
             <p className="legal-page__paragraph">
-              If you have any questions about this Privacy Policy, please contact us at:
+              If you have any questions about this Privacy Policy, please
+              contact us at:
             </p>
             <p className="legal-page__paragraph">
-              <strong>Ondo Solutions Private Limited</strong><br />
-              Email: info@ondosolutions.com<br />
-              Phone: +91-XXXXXXXXXX<br />
+              <strong>Ondo Solutions Private Limited</strong>
+              <br />
+              Email: info@ondosolutions.com
+              <br />
+              Phone: +91-XXXXXXXXXX
+              <br />
               Address: [Your Company Address]
             </p>
           </section>
@@ -356,4 +403,3 @@ function PrivacyPolicy() {
 }
 
 export default PrivacyPolicy;
-

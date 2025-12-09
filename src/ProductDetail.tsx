@@ -151,7 +151,7 @@ function ProductDetail() {
 
   const navLinks = [
     { label: "Home", href: "/", isLink: true },
-    { label: "About Us", href: "/about", isLink: true },
+    { label: "About us", href: "/about", isLink: true },
     { label: "Products", href: "/products", isLink: true },
   ];
 
@@ -205,14 +205,17 @@ function ProductDetail() {
               className="btn btn--primary"
               onClick={handleNavItemClick}
             >
-              Contact Us
+              Contact us
             </Link>
-            <button
+            <a
+              href="http://ondosolutions.store"
               className="btn btn--ghost btn--ghost-dark"
               onClick={handleNavItemClick}
+              target="_blank"
+              rel="noreferrer"
             >
               Login
-            </button>
+            </a>
           </div>
         </div>
       </header>

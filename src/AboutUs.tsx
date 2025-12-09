@@ -15,7 +15,7 @@ import anilMoreImage from "../assets/Anil_Ashok_More.jpg";
 
 const navLinks = [
   { label: "Home", href: "/", isLink: true },
-  { label: "About Us", href: "/about", isLink: true },
+  { label: "About us", href: "/about", isLink: true },
   { label: "Products", href: "/products", isLink: true },
 ];
 
@@ -88,7 +88,11 @@ function AboutUs() {
 
   return (
     <>
-      <header className={`hero__nav hero__nav--white ${isMenuOpen ? "hero__nav--open" : ""}`}>
+      <header
+        className={`hero__nav hero__nav--white ${
+          isMenuOpen ? "hero__nav--open" : ""
+        }`}
+      >
         <Link className="hero__brand" to="/">
           <img src={logo} alt="Ondo logo" />
         </Link>
@@ -127,12 +131,22 @@ function AboutUs() {
             )}
           </nav>
           <div className="hero__actions">
-            <Link to="/contact" className="btn btn--primary" onClick={handleNavItemClick}>
-              Contact Us
+            <Link
+              to="/contact"
+              className="btn btn--primary"
+              onClick={handleNavItemClick}
+            >
+              Contact us
             </Link>
-            <button className="btn btn--ghost btn--ghost-dark" onClick={handleNavItemClick}>
+            <a
+              href="http://ondosolutions.store"
+              className="btn btn--ghost btn--ghost-dark"
+              onClick={handleNavItemClick}
+              target="_blank"
+              rel="noreferrer"
+            >
               Login
-            </button>
+            </a>
           </div>
         </div>
       </header>
@@ -168,7 +182,7 @@ function AboutUs() {
                 deliver real-world impact and lasting value.
               </p>
               <Link to="/contact" className="btn btn--primary about-us__cta">
-                Contact Us
+                Contact us
               </Link>
             </div>
             <div className="about-us__who-image">

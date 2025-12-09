@@ -347,13 +347,13 @@ function TermsConditions() {
             <h3 className="footer__heading">Company</h3>
             <nav className="footer__links">
               <Link to="/about" className="footer__link">
-                About Us
+                About us
               </Link>
               <Link to="/products" className="footer__link">
                 Products and Solutions
               </Link>
               <Link to="/contact" className="footer__link">
-                Contact Us
+                Contact us
               </Link>
               <Link to="/privacy" className="footer__link">
                 Privacy Policy

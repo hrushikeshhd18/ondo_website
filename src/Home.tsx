@@ -639,15 +639,6 @@ function Home() {
                 bills — we aim to make energy efficiency a way of life through
                 intelligent, reliable, and sustainable technologies.
               </p>
-              <p className="footer__description">
-                With over a decade of experience in electrical and electronic
-                engineering, we have mastered the art of designing and
-                manufacturing products that combine technical precision with
-                real-world impact. Our flagship innovation, the Intelligent
-                Energy Management System (IEMS) device, is engineered to
-                optimize power usage, reduce wastage, and enhance the overall
-                performance of electrical systems.
-              </p>
               <div className="footer__social">
                 <a
                   href="#"
@@ -750,13 +741,13 @@ function Home() {
             <h3 className="footer__heading">Company</h3>
             <nav className="footer__links">
               <Link to="/about" className="footer__link">
-                About us
+                About Us
               </Link>
-              <a href="#products" className="footer__link">
+              <Link to="/products" className="footer__link">
                 Products and Solutions
-              </a>
+              </Link>
               <Link to="/contact" className="footer__link">
-                Contact us
+                Contact Us
               </Link>
               <Link to="/privacy" className="footer__link">
                 Privacy Policy

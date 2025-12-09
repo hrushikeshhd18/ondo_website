@@ -9,8 +9,6 @@ import ecoIcon from "../assets/eco_friendly_icon.png";
 import automaticPowerIcon from "../assets/automatic_power_optimization.png";
 import powerFactorIcon from "../assets/power_factor_improvement.png";
 import voltageStabilizationIcon from "../assets/voltage_stabilization_regulation.png";
-import loadBalancingIcon from "../assets/load_balancing_energy_distribution.png";
-import harmonicFiltrationIcon from "../assets/harmonic_filtration_reduction.png";
 import realTimeMonitoringIcon from "../assets/real_time_energy_monitoring.png";
 import intelligentControlIcon from "../assets/intelligent_control_system.png";
 import surgeProtectionIcon from "../assets/surge_overload_protection.png";
@@ -455,7 +453,7 @@ function Home() {
                   to="/contact"
                   className="btn btn--primary product-card__cta"
                 >
-              Contact us
+                  Contact us
                 </Link>
               </div>
             </article>

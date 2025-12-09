@@ -105,8 +105,9 @@ function ProductDetail() {
   const slug = (params.id || "home") as ProductKey;
   const product = productConfigs[slug] ?? productConfigs.home;
 
-  const [quantity, setQuantity] = useState(1);
-  const [activeVariant, setActiveVariant] = useState("Mini");
+  // Commented out - quantity selector is hidden
+  // const [quantity, setQuantity] = useState(1);
+  // const [activeVariant, setActiveVariant] = useState("Mini");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [formName, setFormName] = useState("");
@@ -118,14 +119,15 @@ function ProductDetail() {
   const [formState, setFormState] = useState("");
   const [formAgree, setFormAgree] = useState(false);
 
-  const handleQtyChange = (delta: number) => {
-    setQuantity((prev) => {
-      const next = prev + delta;
-      if (next < 1) return 1;
-      if (next > 99) return 99;
-      return next;
-    });
-  };
+  // Commented out - quantity selector is hidden
+  // const handleQtyChange = (delta: number) => {
+  //   setQuantity((prev) => {
+  //     const next = prev + delta;
+  //     if (next < 1) return 1;
+  //     if (next > 99) return 99;
+  //     return next;
+  //   });
+  // };
 
   // Commented out - buttons are hidden
   // const handleOpenModal = () => {
@@ -280,7 +282,8 @@ function ProductDetail() {
                 <h1 className="product-detail__title">{product.title}</h1>
                 <p className="product-detail__price">{product.price}</p>
 
-                <div className="product-detail__field-group">
+                {/* Quantity/Variants selector commented out */}
+                {/* <div className="product-detail__field-group">
                   <span className="product-detail__field-label">
                     {product.quantityLabel}
                   </span>
@@ -350,7 +353,7 @@ function ProductDetail() {
                       </button>
                     </div>
                   )}
-                </div>
+                </div> */}
 
                 {slug === "commercial" && (
                   <div className="product-detail__note-card">

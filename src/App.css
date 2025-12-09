@@ -1333,40 +1333,40 @@ a.btn:focus {
 
 .benefits__grid {
   display: grid;
-  grid-template-columns: repeat(3, 320px);
-  grid-template-rows: repeat(2, 240px);
-  gap: 20px;
+  grid-template-columns: repeat(3, 380px);
+  grid-template-rows: repeat(2, 280px);
+  gap: clamp(1.5rem, 3vw, 2rem);
   justify-content: center;
   margin-top: clamp(2rem, 4vw, 3rem);
   width: 100%;
 }
 
 .benefit-card {
-  width: 320px;
-  height: 240px;
-  padding: 20px;
+  width: 380px;
+  height: 280px;
+  padding: clamp(1.5rem, 2.5vw, 2rem);
   border-radius: 48px;
   background: #1e1e1e0d;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   box-sizing: border-box;
   text-align: left;
 }
 
 .benefit-card__icon {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
   flex-shrink: 0;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .benefit-card__title {
   font-family: 'Uber Move', 'Uber Move Text', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 24px;
+  font-size: clamp(20px, 2.5vw, 26px);
   line-height: 130%;
   letter-spacing: -0.01em;
   color: #000;
@@ -1378,7 +1378,7 @@ a.btn:focus {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 14px;
+  font-size: clamp(13px, 1.8vw, 15px);
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #000;
@@ -1387,22 +1387,37 @@ a.btn:focus {
   overflow-y: auto;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   .benefits__grid {
-    grid-template-columns: repeat(2, 320px);
-    grid-template-rows: repeat(3, 240px);
+    grid-template-columns: repeat(2, 380px);
+    grid-template-rows: repeat(3, 280px);
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 840px) {
   .benefits__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
     grid-template-rows: auto;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
   }
 
   .benefit-card {
     width: 100%;
-    max-width: 320px;
+    height: auto;
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .benefits__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1.5rem;
+  }
+
+  .benefit-card {
+    width: 100%;
+    max-width: 100%;
     height: auto;
     min-height: 240px;
     margin: 0 auto;

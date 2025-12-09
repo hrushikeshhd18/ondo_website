@@ -127,11 +127,12 @@ function ProductDetail() {
     });
   };
 
-  const handleOpenModal = () => {
-    if (slug === "commercial") {
-      setIsModalOpen(true);
-    }
-  };
+  // Commented out - buttons are hidden
+  // const handleOpenModal = () => {
+  //   if (slug === "commercial") {
+  //     setIsModalOpen(true);
+  //   }
+  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -358,7 +359,8 @@ function ProductDetail() {
                   </div>
                 )}
 
-                <div className="product-detail__cta-row">
+                {/* CTA buttons commented out for now */}
+                {/* <div className="product-detail__cta-row">
                   <button
                     type="button"
                     className="btn btn--primary product-detail__cta-primary"
@@ -369,7 +371,7 @@ function ProductDetail() {
                   <button className="btn btn--ghost product-detail__cta-secondary">
                     {product.secondaryCta}
                   </button>
-                </div>
+                </div> */}
 
                 <div className="product-detail__icons-row">
                   <div className="product-detail__icon-item">

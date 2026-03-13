@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./App.css";
-import heroBackground from "../assets/hero_background.jpg";
 import logo from "../assets/logo.png";
+import LightningBackground from "./components/ui/hero-odyssey";
 import energyIcon from "../assets/energy_efficient_icon.png";
 import durabilityIcon from "../assets/long_durablity_icon.png";
 import ecoIcon from "../assets/eco_friendly_icon.png";
@@ -29,6 +30,7 @@ import customerSupportIcon from "../assets/customer_supoort_icon.png";
 import trustIcon from "../assets/trust_card_icon.png";
 import certificationIcon from "../assets/certification_card_icon.png";
 import TestimonialsSection from "./components/ui/testimonial-v2";
+import ScrollMorphHero from "./components/ui/scroll-morph-hero";
 
 const navLinks = [
   { label: "Home", href: "/", isLink: true },
@@ -237,12 +239,12 @@ function Home() {
     setIsMenuOpen(false);
   };
 
-  // Parallax: move hero background at a fraction of scroll speed (disabled when reduced motion)
+  // Parallax: lightning background moves slower than scroll (disabled when reduced motion)
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const onScroll = () => {
       if (prefersReducedMotion) return;
-      setParallaxOffset(window.scrollY * 0.35);
+      setParallaxOffset(window.scrollY * 0.4);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -276,13 +278,12 @@ function Home() {
     <>
       <section className="hero">
         <div
-          className="hero__parallax-bg"
-          style={{
-            backgroundImage: `url(${heroBackground})`,
-            transform: `translate3d(0, ${parallaxOffset}px, 0)`,
-          }}
+          className="hero__parallax-wrap"
+          style={{ transform: `translate3d(0, ${parallaxOffset}px, 0)` }}
           aria-hidden="true"
-        />
+        >
+          <LightningBackground />
+        </div>
         <div className="hero__overlay" />
         <header
           className={`hero__nav hero__nav--white ${
@@ -460,40 +461,140 @@ function Home() {
       </section>
 
       <section className="products" id="products">
-        <div className="products__wrapper">
-          <div className="products__tag" data-scroll>
+        <motion.div
+          className="products__wrapper"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.12,
+                delayChildren: 0.08,
+              },
+            },
+            hidden: {},
+          }}
+        >
+          <motion.div
+            className="products__tag"
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
             Products
-          </div>
-          <h2 className="products__title" data-scroll>
+          </motion.div>
+          <motion.h2
+            className="products__title"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          >
             Our Offerings
-          </h2>
-          <p className="products__description" data-scroll>
+          </motion.h2>
+          <motion.p
+            className="products__description"
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          >
             Our product range is designed to save power, protect appliances, and
             optimize energy usage across households, commercial establishments,
             and industries.
-          </p>
+          </motion.p>
           {productCards.map((product, index) => (
-            <article className="product-card" key={index} data-scroll>
-              <div className="product-card__image">
+            <motion.article
+              className="product-card"
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 32 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{ y: -4 }}
+            >
+              <motion.div
+                className="product-card__image"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <img src={product.image} alt={product.alt} />
-              </div>
+              </motion.div>
               <div className="product-card__content">
                 <p className="product-card__category">{product.category}</p>
                 <h3 className="product-card__title">{product.title}</h3>
                 <ol className="product-card__features">
                   {product.features.map((feature, featureIndex) => (
-                    <li key={featureIndex}>{feature}</li>
+                    <motion.li
+                      key={featureIndex}
+                      initial={{ opacity: 0, x: -8 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.35,
+                        delay: 0.1 + featureIndex * 0.04,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      {feature}
+                    </motion.li>
                   ))}
                 </ol>
-                <Link
-                  to="/contact"
-                  className="btn btn--primary product-card__cta"
-                >
-                  Contact us
-                </Link>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    to="/contact"
+                    className="btn btn--primary product-card__cta"
+                  >
+                    Contact us
+                  </Link>
+                </motion.div>
               </div>
-            </article>
+            </motion.article>
           ))}
+        </motion.div>
+      </section>
+
+      <section className="morph-section" id="explore-products" data-scroll>
+        <div className="morph-section__wrap">
+          <ScrollMorphHero
+            usePageScroll
+            images={[
+              homePowerSaverImage,
+              industrialPowerSaverImage,
+              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80",
+              "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=300&q=80",
+              "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=300&q=80",
+              "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80",
+              "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=300&q=80",
+              homePowerSaverImage,
+              "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80",
+              "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&q=80",
+              "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=300&q=80",
+              industrialPowerSaverImage,
+              "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=300&q=80",
+              "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&q=80",
+              "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&q=80",
+              "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=300&q=80",
+              "https://images.unsplash.com/photo-1551434678-e076c223a692?w=300&q=80",
+              "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&q=80",
+              homePowerSaverImage,
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80",
+              "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=300&q=80",
+            ]}
+            title="Explore Our Products"
+            subtitle="Discover power-saving solutions for home and industry. Scroll through our range of IEMS devices designed to cut costs and protect your appliances."
+            scrollHint="SCROLL TO EXPLORE"
+            detailHref="/products"
+          />
         </div>
       </section>
 

@@ -4,8 +4,8 @@
 :root {
   font-family: 'Uber Move Text', 'Uber Move', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
-  color: #f5f7ff;
-  background-color: #020a1f;
+  color: #1a1a1a;
+  background-color: #ffffff;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
@@ -20,7 +20,7 @@
 
 body {
   min-height: 100vh;
-  background-color: #020a1f;
+  background-color: #ffffff;
 }
 
 #root {

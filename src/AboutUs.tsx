@@ -10,7 +10,6 @@ import ecoIcon from "../assets/eco_friendly_icon.png";
 import energySavingsIcon from "../assets/energy_cost_savings.png";
 import safetyFirstIcon from "../assets/safety_first_card_icon.png";
 import certificationIcon from "../assets/certification_card_icon.png";
-import sushilkumarImage from "../assets/Sushilkumar_Ramchandra_Patil.jpg";
 import anilMoreImage from "../assets/Anil_Ashok_More.jpg";
 
 const navLinks = [
@@ -65,12 +64,6 @@ const coreValues = [
 ];
 
 const leadership = [
-  {
-    image: sushilkumarImage,
-    alt: "Mr. Sushilkumar Ramchandra Patil",
-    name: "Mr. Sushilkumar Ramchandra Patil",
-    title: "Managing Director – Ondo Solutions Private Limited",
-  },
   {
     image: anilMoreImage,
     alt: "Mr. Anil Ashok More",
@@ -359,8 +352,8 @@ function AboutUs() {
             Future
           </h2>
           <p className="about-us__description about-us__description--centered">
-            Under the visionary leadership of Mr. Sushilkumar Patil and Mr. Anil
-            More, Ondo Solutions Private Limited is rapidly emerging as a
+            Under the visionary leadership of Mr. Anil More, Ondo Solutions Private
+            Limited is rapidly emerging as a
             trusted name in the field of Intelligent Energy Management System
             and Smart Power Solutions. Their combined expertise — in business
             strategy, legal compliance, and technical innovation — continues to

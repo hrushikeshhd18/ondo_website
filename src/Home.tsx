@@ -28,6 +28,7 @@ import userFriendlyIcon from "../assets/user_friendly_card_icon.png";
 import customerSupportIcon from "../assets/customer_supoort_icon.png";
 import trustIcon from "../assets/trust_card_icon.png";
 import certificationIcon from "../assets/certification_card_icon.png";
+import TestimonialsSection from "./components/ui/testimonial-v2";
 
 const navLinks = [
   { label: "Home", href: "/", isLink: true },
@@ -230,12 +231,24 @@ const benefits = [
 
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
 
   const handleNavItemClick = () => {
     setIsMenuOpen(false);
   };
 
-  // Simple scroll animation
+  // Parallax: move hero background at a fraction of scroll speed (disabled when reduced motion)
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const onScroll = () => {
+      if (prefersReducedMotion) return;
+      setParallaxOffset(window.scrollY * 0.35);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scroll-triggered reveal animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -246,8 +259,8 @@ function Home() {
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
+        threshold: 0.08,
+        rootMargin: "0px 0px -40px 0px",
       }
     );
 
@@ -261,10 +274,15 @@ function Home() {
 
   return (
     <>
-      <section
-        className="hero"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section className="hero">
+        <div
+          className="hero__parallax-bg"
+          style={{
+            backgroundImage: `url(${heroBackground})`,
+            transform: `translate3d(0, ${parallaxOffset}px, 0)`,
+          }}
+          aria-hidden="true"
+        />
         <div className="hero__overlay" />
         <header
           className={`hero__nav hero__nav--white ${
@@ -331,15 +349,33 @@ function Home() {
 
         <main className="hero__content">
           <div className="hero__text">
-            <span className="hero__tagline">Save Energy, Smarter Control</span>
-            <h1>Welcome to the future of energy conservation!</h1>
-            <p>
-              Reduce electricity bills, protect your appliances, and contribute
-              to a greener future with our advanced power saver solutions.
+            <span className="hero__tagline hero__animate hero__animate--1">
+              Save Energy, Smarter Control
+            </span>
+            <h1 className="hero__animate hero__animate--2">
+              Intelligent power saving for home & industry
+            </h1>
+            <p className="hero__animate hero__animate--3">
+              Cut electricity bills, protect appliances, and build a greener
+              future with our IEMS power savers — trusted by 10,000+ customers.
             </p>
-            <Link to="/contact" className="btn btn--primary hero__cta">
-              Contact us
-            </Link>
+            <div className="hero__ctas hero__animate hero__animate--4">
+              <Link to="/contact" className="btn btn--primary hero__cta">
+                Get in touch
+              </Link>
+              <Link to="/products" className="btn btn--ghost hero__cta hero__cta--secondary" onClick={handleNavItemClick}>
+                View products
+              </Link>
+            </div>
+          </div>
+          <div className="hero__visual hero__animate hero__animate--product">
+            <div className="hero__product-glow" aria-hidden="true" />
+            <div className="hero__product-card">
+              <img
+                src={homePowerSaverImage}
+                alt="Ondo Power Saver — smart energy device for home and industry"
+              />
+            </div>
           </div>
         </main>
       </section>
@@ -512,95 +548,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="testimonials" id="testimonials">
-        <div className="testimonials__wrapper">
-          <div className="testimonials__tag" data-scroll>
-            Review
-          </div>
-          <h2 className="testimonials__title" data-scroll>
-            What do people say about us
-          </h2>
-          <p className="testimonials__description" data-scroll>
-            Over 10,000 satisfied customers across households, corporate
-            offices, and manufacturing units have reduced their electricity
-            costs with our products
-          </p>
-          <div className="testimonials__grid">
-            <article className="testimonial-card" data-scroll>
-              <div className="testimonial-card__header">
-                <div className="testimonial-card__avatar">
-                  <div className="testimonial-card__avatar-placeholder">RK</div>
-                </div>
-                <div className="testimonial-card__info">
-                  <h3 className="testimonial-card__name">Rajesh Kumar</h3>
-                  <p className="testimonial-card__title">Home Owner</p>
-                </div>
-              </div>
-              <div className="testimonial-card__rating">
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-              </div>
-              <p className="testimonial-card__text">
-                "The power saver has reduced our electricity bills by almost 30%
-                in just three months. Installation was quick and easy, and we
-                noticed the difference immediately. Excellent investment for any
-                household!"
-              </p>
-            </article>
-            <article className="testimonial-card" data-scroll>
-              <div className="testimonial-card__header">
-                <div className="testimonial-card__avatar">
-                  <div className="testimonial-card__avatar-placeholder">PS</div>
-                </div>
-                <div className="testimonial-card__info">
-                  <h3 className="testimonial-card__name">Priya Sharma</h3>
-                  <p className="testimonial-card__title">Business Owner</p>
-                </div>
-              </div>
-              <div className="testimonial-card__rating">
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star">★</span>
-              </div>
-              <p className="testimonial-card__text">
-                "Our appliances are now better protected from voltage
-                fluctuations, and the energy savings have been substantial. The
-                device is very reliable and requires minimal maintenance. Highly
-                satisfied with the purchase!"
-              </p>
-            </article>
-            <article className="testimonial-card" data-scroll>
-              <div className="testimonial-card__header">
-                <div className="testimonial-card__avatar">
-                  <div className="testimonial-card__avatar-placeholder">AP</div>
-                </div>
-                <div className="testimonial-card__info">
-                  <h3 className="testimonial-card__name">Amit Patel</h3>
-                  <p className="testimonial-card__title">Factory Manager</p>
-                </div>
-              </div>
-              <div className="testimonial-card__rating">
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-                <span className="star star--filled">★</span>
-              </div>
-              <p className="testimonial-card__text">
-                "We installed this in our factory and saw immediate improvements
-                in power factor and energy efficiency. The ROI has been
-                excellent, and our electricity costs have dropped significantly.
-                Great investment for any industrial setup!"
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
 
       <footer className="footer">
         <div className="footer__wrapper">

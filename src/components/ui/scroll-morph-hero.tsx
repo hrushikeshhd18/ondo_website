@@ -118,15 +118,13 @@ const DEFAULT_IMAGES = [
 const lerp = (start: number, end: number, t: number) =>
   start * (1 - t) + end * t;
 
-const SECTION_SCROLL_HEIGHT = 1800;
-
 interface ScrollMorphHeroProps {
   images?: string[];
   title?: string;
   subtitle?: string;
   scrollHint?: string;
   detailHref?: string;
-  /** When true, morph is driven by page scroll (section must be in document flow) */
+  /** When true, wrap in a 100vh section for the home page; scroll is always wheel/touch on the component */
   usePageScroll?: boolean;
 }
 
@@ -141,7 +139,6 @@ export default function ScrollMorphHero({
   const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
 
   const displayImages = images.slice(0, TOTAL_IMAGES);
   const totalDisplay = displayImages.length;
@@ -173,33 +170,8 @@ export default function ScrollMorphHero({
   const virtualScroll = useMotionValue(0);
   const scrollRef = useRef(0);
 
+  // Reference behavior: wheel/touch on the container drives the animation (0..MAX_SCROLL)
   useEffect(() => {
-    if (usePageScroll) {
-      const onScroll = () => {
-        const section = sectionRef.current;
-        if (!section) return;
-        const scrollY = window.scrollY ?? window.pageYOffset;
-        const rect = section.getBoundingClientRect();
-        const sectionTop = rect.top + scrollY;
-        const progress = Math.min(
-          Math.max(scrollY - sectionTop, 0),
-          SECTION_SCROLL_HEIGHT
-        );
-        virtualScroll.set(progress);
-      };
-      const onResize = () => requestAnimationFrame(onScroll);
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onResize);
-      const raf = requestAnimationFrame(() => {
-        onScroll();
-      });
-      return () => {
-        cancelAnimationFrame(raf);
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onResize);
-      };
-    }
-
     const container = containerRef.current;
     if (!container) return;
 
@@ -238,14 +210,13 @@ export default function ScrollMorphHero({
       container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchmove", handleTouchMove);
     };
-  }, [virtualScroll, usePageScroll]);
+  }, [virtualScroll]);
 
   const morphEnd = 600;
-  const rotateEnd = usePageScroll ? SECTION_SCROLL_HEIGHT : MAX_SCROLL;
   const morphProgress = useTransform(virtualScroll, [0, morphEnd], [0, 1]);
   const smoothMorph = useSpring(morphProgress, { stiffness: 40, damping: 20 });
 
-  const scrollRotate = useTransform(virtualScroll, [morphEnd, rotateEnd], [0, 360]);
+  const scrollRotate = useTransform(virtualScroll, [morphEnd, MAX_SCROLL], [0, 360]);
   const smoothScrollRotate = useSpring(scrollRotate, {
     stiffness: 40,
     damping: 20,
@@ -307,266 +278,145 @@ export default function ScrollMorphHero({
   const contentOpacity = useTransform(smoothMorph, [0.8, 1], [0, 1]);
   const contentY = useTransform(smoothMorph, [0.8, 1], [20, 0]);
 
-  const content = (
-    <div
-      className="relative w-full h-full bg-[#FAFAFA] overflow-hidden rounded-2xl"
-      style={usePageScroll ? { minHeight: "100vh" } : undefined}
-    >
-      {usePageScroll ? (
-        <div className="flex flex-col h-full w-full">
-          <motion.div
-            style={{ opacity: contentOpacity, y: contentY }}
-            className="shrink-0 flex flex-col items-center justify-center text-center pointer-events-none px-4 pt-8 pb-4 md:pt-10 md:pb-6"
-          >
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight mb-3 md:mb-4">
-              {title}
-            </h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed mx-auto">
-              {subtitle}
-            </p>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={
-                introPhase === "circle" && morphValue < 0.5
-                  ? { opacity: 1 - morphValue * 2, y: 0 }
-                  : { opacity: 0, y: 0 }
-              }
-              transition={{ duration: 0.5 }}
-              className="mt-4 md:mt-6"
-            >
-              <p className="text-xl md:text-3xl font-medium tracking-tight text-gray-800">
-                Power-saving solutions for every need.
-              </p>
-              <p className="mt-2 text-xs font-bold tracking-[0.2em] text-gray-500">
-                {scrollHint}
-              </p>
-            </motion.div>
-          </motion.div>
-          <div
-            ref={containerRef}
-            className="flex-1 min-h-0 flex flex-col items-center justify-center perspective-1000 w-full relative"
-          >
-            <div className="relative flex items-center justify-center w-full h-full flex-1 min-h-0">
-              {displayImages.map((src, i) => {
-                let target: FlipCardProps["target"] = {
-                  x: 0,
-                  y: 0,
-                  rotation: 0,
-                  scale: 1,
-                  opacity: 1,
-                };
-
-                if (introPhase === "scatter") {
-                  target = scatterPositions[i];
-                } else if (introPhase === "line") {
-                  const lineSpacing = 70;
-                  const lineTotalWidth = totalDisplay * lineSpacing;
-                  const lineX = i * lineSpacing - lineTotalWidth / 2;
-                  target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
-                } else {
-                  const isMobile = containerSize.width < 768;
-                  const minDimension = Math.min(
-                    containerSize.width,
-                    containerSize.height
-                  );
-                  const circleRadius = Math.min(minDimension * 0.35, 350);
-                  const circleAngle = (i / totalDisplay) * 360;
-                  const circleRad = (circleAngle * Math.PI) / 180;
-                  const circlePos = {
-                    x: Math.cos(circleRad) * circleRadius,
-                    y: Math.sin(circleRad) * circleRadius,
-                    rotation: circleAngle + 90,
-                  };
-
-                  const baseRadius = Math.min(
-                    containerSize.width,
-                    containerSize.height * 1.5
-                  );
-                  const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
-                  const arcApexY = containerSize.height * (isMobile ? 0.35 : 0.25);
-                  const arcCenterY = arcApexY + arcRadius;
-                  const spreadAngle = isMobile ? 100 : 130;
-                  const startAngle = -90 - spreadAngle / 2;
-                  const step = spreadAngle / (totalDisplay - 1 || 1);
-                  const scrollProgress = Math.min(Math.max(rotateValue / 360, 0), 1);
-                  const maxRotation = spreadAngle * 0.8;
-                  const boundedRotation = -scrollProgress * maxRotation;
-                  const currentArcAngle = startAngle + i * step + boundedRotation;
-                  const arcRad = (currentArcAngle * Math.PI) / 180;
-                  const arcPos = {
-                    x: Math.cos(arcRad) * arcRadius + parallaxValue,
-                    y: Math.sin(arcRad) * arcRadius + arcCenterY,
-                    rotation: currentArcAngle + 90,
-                    scale: isMobile ? 1.4 : 1.8,
-                  };
-
-                  target = {
-                    x: lerp(circlePos.x, arcPos.x, morphValue),
-                    y: lerp(circlePos.y, arcPos.y, morphValue),
-                    rotation: lerp(circlePos.rotation, arcPos.rotation, morphValue),
-                    scale: lerp(1, arcPos.scale, morphValue),
-                    opacity: 1,
-                  };
-                }
-
-                return (
-                  <FlipCard
-                    key={i}
-                    src={src}
-                    index={i}
-                    total={totalDisplay}
-                    phase={introPhase}
-                    target={target}
-                    detailHref={detailHref}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div
-          ref={containerRef}
-          className="flex h-full w-full flex-col items-center justify-center perspective-1000"
+  // Reference layout: one container (ref=containerRef), intro center, content top 10%, cards full area
+  const step = (totalDisplay - 1) || 1;
+  const inner = (
+    <div className="flex h-full w-full flex-col items-center justify-center perspective-1000">
+      {/* Intro text (center, fades out as morph starts) */}
+      <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2">
+        <motion.h1
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          animate={
+            introPhase === "circle" && morphValue < 0.5
+              ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" }
+              : { opacity: 0, filter: "blur(10px)" }
+          }
+          transition={{ duration: 1 }}
+          className="text-2xl font-medium tracking-tight text-gray-800 md:text-4xl"
         >
-          <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2">
-            <motion.h1
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={
-                introPhase === "circle" && morphValue < 0.5
-                  ? {
-                      opacity: 1 - morphValue * 2,
-                      y: 0,
-                      filter: "blur(0px)",
-                    }
-                  : { opacity: 0, filter: "blur(10px)" }
-              }
-              transition={{ duration: 1 }}
-              className="text-2xl font-medium tracking-tight text-gray-800 md:text-4xl"
-            >
-              Power-saving solutions for every need.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={
-                introPhase === "circle" && morphValue < 0.5
-                  ? { opacity: 0.5 - morphValue }
-                  : { opacity: 0 }
-              }
-              transition={{ duration: 1, delay: 0.2 }}
-              className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-500"
-            >
-              {scrollHint}
-            </motion.p>
-          </div>
+          Power-saving solutions for every need.
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={
+            introPhase === "circle" && morphValue < 0.5
+              ? { opacity: 0.5 - morphValue }
+              : { opacity: 0 }
+          }
+          transition={{ duration: 1, delay: 0.2 }}
+          className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-500"
+        >
+          {scrollHint}
+        </motion.p>
+      </div>
 
-          <motion.div
-            style={{ opacity: contentOpacity, y: contentY }}
-            className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
-          >
-            <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight mb-4">
-              {title}
-            </h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed">
-              {subtitle}
-            </p>
-          </motion.div>
+      {/* Arc active content (top, fades in when morph > 0.8) */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
+      >
+        <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight mb-4">
+          {title}
+        </h2>
+        <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed">
+          {subtitle}
+        </p>
+      </motion.div>
 
-          <div className="relative flex items-center justify-center w-full h-full">
-          {displayImages.map((src, i) => {
-            let target: FlipCardProps["target"] = {
-              x: 0,
-              y: 0,
-              rotation: 0,
-              scale: 1,
-              opacity: 1,
+      {/* Cards (reference: scatter → line → circle → morph to arc → rotate) */}
+      <div className="relative flex items-center justify-center w-full h-full">
+        {displayImages.map((src, i) => {
+          let target: FlipCardProps["target"] = {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            opacity: 1,
+          };
+
+          if (introPhase === "scatter") {
+            target = scatterPositions[i];
+          } else if (introPhase === "line") {
+            const lineSpacing = 70;
+            const lineTotalWidth = totalDisplay * lineSpacing;
+            const lineX = i * lineSpacing - lineTotalWidth / 2;
+            target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
+          } else {
+            const isMobile = containerSize.width < 768;
+            const minDimension = Math.min(containerSize.width, containerSize.height);
+            const circleRadius = Math.min(minDimension * 0.35, 350);
+            const circleAngle = (i / totalDisplay) * 360;
+            const circleRad = (circleAngle * Math.PI) / 180;
+            const circlePos = {
+              x: Math.cos(circleRad) * circleRadius,
+              y: Math.sin(circleRad) * circleRadius,
+              rotation: circleAngle + 90,
             };
 
-            if (introPhase === "scatter") {
-              target = scatterPositions[i];
-            } else if (introPhase === "line") {
-              const lineSpacing = 70;
-              const lineTotalWidth = totalDisplay * lineSpacing;
-              const lineX = i * lineSpacing - lineTotalWidth / 2;
-              target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
-            } else {
-              const isMobile = containerSize.width < 768;
-              const minDimension = Math.min(
-                containerSize.width,
-                containerSize.height
-              );
-              const circleRadius = Math.min(minDimension * 0.35, 350);
-              const circleAngle = (i / totalDisplay) * 360;
-              const circleRad = (circleAngle * Math.PI) / 180;
-              const circlePos = {
-                x: Math.cos(circleRad) * circleRadius,
-                y: Math.sin(circleRad) * circleRadius,
-                rotation: circleAngle + 90,
-              };
+            const baseRadius = Math.min(containerSize.width, containerSize.height * 1.5);
+            const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
+            const arcApexY = containerSize.height * (isMobile ? 0.35 : 0.25);
+            const arcCenterY = arcApexY + arcRadius;
+            const spreadAngle = isMobile ? 100 : 130;
+            const startAngle = -90 - spreadAngle / 2;
+            const stepAngle = spreadAngle / step;
+            const scrollProgress = Math.min(Math.max(rotateValue / 360, 0), 1);
+            const maxRotation = spreadAngle * 0.8;
+            const boundedRotation = -scrollProgress * maxRotation;
+            const currentArcAngle = startAngle + i * stepAngle + boundedRotation;
+            const arcRad = (currentArcAngle * Math.PI) / 180;
+            const arcPos = {
+              x: Math.cos(arcRad) * arcRadius + parallaxValue,
+              y: Math.sin(arcRad) * arcRadius + arcCenterY,
+              rotation: currentArcAngle + 90,
+              scale: isMobile ? 1.4 : 1.8,
+            };
 
-              const baseRadius = Math.min(
-                containerSize.width,
-                containerSize.height * 1.5
-              );
-              const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
-              const arcApexY = containerSize.height * (isMobile ? 0.35 : 0.25);
-              const arcCenterY = arcApexY + arcRadius;
-              const spreadAngle = isMobile ? 100 : 130;
-              const startAngle = -90 - spreadAngle / 2;
-              const step = spreadAngle / (totalDisplay - 1 || 1);
-              const scrollProgress = Math.min(Math.max(rotateValue / 360, 0), 1);
-              const maxRotation = spreadAngle * 0.8;
-              const boundedRotation = -scrollProgress * maxRotation;
-              const currentArcAngle = startAngle + i * step + boundedRotation;
-              const arcRad = (currentArcAngle * Math.PI) / 180;
-              const arcPos = {
-                x: Math.cos(arcRad) * arcRadius + parallaxValue,
-                y: Math.sin(arcRad) * arcRadius + arcCenterY,
-                rotation: currentArcAngle + 90,
-                scale: isMobile ? 1.4 : 1.8,
-              };
+            target = {
+              x: lerp(circlePos.x, arcPos.x, morphValue),
+              y: lerp(circlePos.y, arcPos.y, morphValue),
+              rotation: lerp(circlePos.rotation, arcPos.rotation, morphValue),
+              scale: lerp(1, arcPos.scale, morphValue),
+              opacity: 1,
+            };
+          }
 
-              target = {
-                x: lerp(circlePos.x, arcPos.x, morphValue),
-                y: lerp(circlePos.y, arcPos.y, morphValue),
-                rotation: lerp(circlePos.rotation, arcPos.rotation, morphValue),
-                scale: lerp(1, arcPos.scale, morphValue),
-                opacity: 1,
-              };
-            }
-
-            return (
-              <FlipCard
-                key={i}
-                src={src}
-                index={i}
-                total={totalDisplay}
-                phase={introPhase}
-                target={target}
-                detailHref={detailHref}
-              />
-            );
-          })}
-        </div>
+          return (
+            <FlipCard
+              key={i}
+              src={src}
+              index={i}
+              total={totalDisplay}
+              phase={introPhase}
+              target={target}
+              detailHref={detailHref}
+            />
+          );
+        })}
       </div>
-      )}
+    </div>
+  );
+
+  const containerNode = (
+    <div
+      ref={containerRef}
+      className="relative w-full h-full bg-[#FAFAFA] overflow-hidden rounded-2xl"
+    >
+      {inner}
     </div>
   );
 
   if (usePageScroll) {
     return (
-      <div
-        ref={sectionRef}
-        className="scroll-morph-section"
-        style={{ height: SECTION_SCROLL_HEIGHT }}
+      <section
+        className="scroll-morph-section min-h-screen h-screen"
+        style={{ minHeight: "100vh" }}
         aria-label="Explore products"
       >
-        <div className="scroll-morph-section__sticky" style={{ position: "sticky", top: 0, minHeight: "100vh" }}>
-          {content}
-        </div>
-      </div>
+        {containerNode}
+      </section>
     );
   }
 
-  return content;
+  return containerNode;
 }

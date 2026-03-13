@@ -118,13 +118,16 @@ const DEFAULT_IMAGES = [
 const lerp = (start: number, end: number, t: number) =>
   start * (1 - t) + end * t;
 
+/** When usePageScroll: height of the section in px; parent scroll over this range drives morph 0–600, rotate 600–3000 */
+const SECTION_SCROLL_HEIGHT = 3000;
+
 interface ScrollMorphHeroProps {
   images?: string[];
   title?: string;
   subtitle?: string;
   scrollHint?: string;
   detailHref?: string;
-  /** When true, wrap in a 100vh section for the home page; scroll is always wheel/touch on the component */
+  /** When true, section is tall (SECTION_SCROLL_HEIGHT); parent page scroll drives the animation for continuous scroll */
   usePageScroll?: boolean;
 }
 
@@ -139,6 +142,7 @@ export default function ScrollMorphHero({
   const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const displayImages = images.slice(0, TOTAL_IMAGES);
   const totalDisplay = displayImages.length;
@@ -170,8 +174,32 @@ export default function ScrollMorphHero({
   const virtualScroll = useMotionValue(0);
   const scrollRef = useRef(0);
 
-  // Reference behavior: wheel/touch on the container drives the animation (0..MAX_SCROLL)
+  // When usePageScroll: parent scroll drives animation (continuous page scroll). Else: wheel/touch on container.
   useEffect(() => {
+    if (usePageScroll) {
+      const onScroll = () => {
+        const section = sectionRef.current;
+        if (!section) return;
+        const scrollY = window.scrollY ?? window.pageYOffset;
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top + scrollY;
+        const progress = Math.min(
+          Math.max(scrollY - sectionTop, 0),
+          SECTION_SCROLL_HEIGHT
+        );
+        virtualScroll.set(progress);
+      };
+      const onResize = () => requestAnimationFrame(onScroll);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onResize);
+      const raf = requestAnimationFrame(() => onScroll());
+      return () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onResize);
+      };
+    }
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -210,13 +238,14 @@ export default function ScrollMorphHero({
       container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchmove", handleTouchMove);
     };
-  }, [virtualScroll]);
+  }, [virtualScroll, usePageScroll]);
 
   const morphEnd = 600;
+  const rotateEnd = usePageScroll ? SECTION_SCROLL_HEIGHT : MAX_SCROLL;
   const morphProgress = useTransform(virtualScroll, [0, morphEnd], [0, 1]);
   const smoothMorph = useSpring(morphProgress, { stiffness: 40, damping: 20 });
 
-  const scrollRotate = useTransform(virtualScroll, [morphEnd, MAX_SCROLL], [0, 360]);
+  const scrollRotate = useTransform(virtualScroll, [morphEnd, rotateEnd], [0, 360]);
   const smoothScrollRotate = useSpring(scrollRotate, {
     stiffness: 40,
     damping: 20,
@@ -408,13 +437,19 @@ export default function ScrollMorphHero({
 
   if (usePageScroll) {
     return (
-      <section
-        className="scroll-morph-section min-h-screen h-screen"
-        style={{ minHeight: "100vh" }}
+      <div
+        ref={sectionRef}
+        className="scroll-morph-section"
+        style={{ height: SECTION_SCROLL_HEIGHT }}
         aria-label="Explore products"
       >
-        {containerNode}
-      </section>
+        <div
+          className="scroll-morph-section__sticky"
+          style={{ position: "sticky", top: 0, minHeight: "100vh", height: "100vh" }}
+        >
+          {containerNode}
+        </div>
+      </div>
     );
   }
 

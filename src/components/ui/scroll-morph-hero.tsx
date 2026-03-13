@@ -321,44 +321,20 @@ export default function ScrollMorphHero({
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight mb-3 md:mb-4">
               {title}
             </h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed mx-auto">
+            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed mx-auto mb-4">
               {subtitle}
+            </p>
+            <p className="text-lg md:text-xl font-medium tracking-tight text-gray-800">
+              Power-saving solutions for every need.
+            </p>
+            <p className="mt-2 text-xs font-bold tracking-[0.2em] text-gray-500">
+              {scrollHint}
             </p>
           </motion.div>
           <div
             ref={containerRef}
             className="flex-1 min-h-0 flex flex-col items-center justify-center perspective-1000 w-full relative"
           >
-            <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2 left-0 right-0">
-              <motion.h1
-                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                animate={
-                  introPhase === "circle" && morphValue < 0.5
-                    ? {
-                        opacity: 1 - morphValue * 2,
-                        y: 0,
-                        filter: "blur(0px)",
-                      }
-                    : { opacity: 0, filter: "blur(10px)" }
-                }
-                transition={{ duration: 1 }}
-                className="text-xl md:text-3xl font-medium tracking-tight text-gray-800"
-              >
-                Power-saving solutions for every need.
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={
-                  introPhase === "circle" && morphValue < 0.5
-                    ? { opacity: 0.5 - morphValue }
-                    : { opacity: 0 }
-                }
-                transition={{ duration: 1, delay: 0.2 }}
-                className="mt-3 text-xs font-bold tracking-[0.2em] text-gray-500"
-              >
-                {scrollHint}
-              </motion.p>
-            </div>
             <div className="relative flex items-center justify-center w-full h-full flex-1 min-h-0">
               {displayImages.map((src, i) => {
                 let target: FlipCardProps["target"] = {

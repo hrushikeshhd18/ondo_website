@@ -316,20 +316,31 @@ export default function ScrollMorphHero({
         <div className="flex flex-col h-full w-full">
           <motion.div
             style={{ opacity: contentOpacity, y: contentY }}
-            className="shrink-0 flex flex-col items-center justify-center text-center pointer-events-none px-4 pt-8 pb-6 md:pt-10 md:pb-8"
+            className="shrink-0 flex flex-col items-center justify-center text-center pointer-events-none px-4 pt-8 pb-4 md:pt-10 md:pb-6"
           >
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight mb-3 md:mb-4">
               {title}
             </h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed mx-auto mb-4">
+            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed mx-auto">
               {subtitle}
             </p>
-            <p className="text-lg md:text-xl font-medium tracking-tight text-gray-800">
-              Power-saving solutions for every need.
-            </p>
-            <p className="mt-2 text-xs font-bold tracking-[0.2em] text-gray-500">
-              {scrollHint}
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={
+                introPhase === "circle" && morphValue < 0.5
+                  ? { opacity: 1 - morphValue * 2, y: 0 }
+                  : { opacity: 0, y: 0 }
+              }
+              transition={{ duration: 0.5 }}
+              className="mt-4 md:mt-6"
+            >
+              <p className="text-xl md:text-3xl font-medium tracking-tight text-gray-800">
+                Power-saving solutions for every need.
+              </p>
+              <p className="mt-2 text-xs font-bold tracking-[0.2em] text-gray-500">
+                {scrollHint}
+              </p>
+            </motion.div>
           </motion.div>
           <div
             ref={containerRef}
